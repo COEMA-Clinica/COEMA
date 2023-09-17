@@ -19,8 +19,8 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_foreground" <!-- Puedes reemplazar esto con la imagen de perfil del usuario -->
-    android:contentDescription="@string/profile_picture" />
+        android:src="@drawable/ic_launcher_foreground"/>
+
 
     <EditText
         android:id="@+id/editTextFirstName"
@@ -70,5 +70,11 @@
         android:layout_height="wrap_content"
         android:hint="Número de Teléfono"
         android:inputType="phone" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </LinearLayout>
