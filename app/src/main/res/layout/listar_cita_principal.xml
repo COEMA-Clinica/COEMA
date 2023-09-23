@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="9dp"
+        android:text="Tus Citas"
+        android:textColor="#1AEBB2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/fgtItemPrin"
+        app:layout_constraintStart_toStartOf="@+id/fgtItemPrin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnMenuPrin"
+        android:layout_width="207dp"
+        android:layout_height="50dp"
+        android:onClick="regresarMenuPrincipal"
+        android:text="Menu Principal"
+        app:backgroundTint="#1AEBB2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/fgtItemPrin" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fgtItemPrin"
+        android:name="healthandtechnology.com.healthandtechnologyapp.FragmentItemCitas"
+        android:layout_width="285dp"
+        android:layout_height="477dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="205dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fgtListarPrincipal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fgtListarPrincipal"
+        android:name="healthandtechnology.com.healthandtechnologyapp.FragmentListarCitas"
+        android:layout_width="104dp"
+        android:layout_height="271dp"
+        android:layout_marginTop="131dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="245dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnMenuPrin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fgtItemPrin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

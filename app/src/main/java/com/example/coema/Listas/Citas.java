@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class Citas implements Serializable {
 
 
-    private int id_foto,id;
-    private String nom, doc, clin, esp, fecCit, apePat, apeMat,sexo, correo;
+    private int id_foto, id;
+    private String nom, odo, ate, hor, fecCit, apePat, apeMat, sexo, correo;
 
-    public Citas(int id_foto, String nom, String doc, String clin, String esp, String fecCit, String apePat, String apeMat, String sexo, String correo) {
+    public Citas(int id_foto, String nom, String odo, String ate, String hor, String fecCit, String apePat, String apeMat, String sexo, String correo) {
         this.id_foto = id_foto;
         this.nom = nom;
-        this.doc = doc;
-        this.clin = clin;
-        this.esp = esp;
+        this.odo = odo;
+        this.ate = ate;
+        this.hor = hor;
         this.fecCit = fecCit;
         this.apePat = apePat;
         this.apeMat = apeMat;
@@ -22,13 +22,13 @@ public class Citas implements Serializable {
 
     }
 
-    public Citas(int id, int id_foto, String nom, String doc, String clin, String esp, String fecCit, String apePat, String apeMat, String sexo, String correo) {
-        this.id=id;
+    public Citas(int id, int id_foto, String nom, String odo, String ate, String hor, String fecCit, String apePat, String apeMat, String sexo, String correo) {
+        this.id = id;
         this.id_foto = id_foto;
         this.nom = nom;
-        this.doc = doc;
-        this.clin = clin;
-        this.esp = esp;
+        this.odo = odo;
+        this.ate = ate;
+        this.hor = hor;
         this.fecCit = fecCit;
         this.apePat = apePat;
         this.apeMat = apeMat;
@@ -49,14 +49,6 @@ public class Citas implements Serializable {
         this.id_foto = id_foto;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public int getId() {
         return id;
     }
@@ -65,28 +57,36 @@ public class Citas implements Serializable {
         this.id = id;
     }
 
-    public String getDoc() {
-        return doc;
+    public String getNom() {
+        return nom;
     }
 
-    public void setDoc(String doc) {
-        this.doc = doc;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public String getClin() {
-        return clin;
+    public String getOdo() {
+        return odo;
     }
 
-    public void setClin(String clin) {
-        this.clin = clin;
+    public void setOdo(String odo) {
+        this.odo = odo;
     }
 
-    public String getEsp() {
-        return esp;
+    public String getAte() {
+        return ate;
     }
 
-    public void setEsp(String esp) {
-        this.esp = esp;
+    public void setAte(String ate) {
+        this.ate = ate;
+    }
+
+    public String getHor() {
+        return hor;
+    }
+
+    public void setHor(String hor) {
+        this.hor = hor;
     }
 
     public String getFecCit() {

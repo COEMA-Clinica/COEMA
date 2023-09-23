@@ -38,42 +38,32 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtApeMaItem"
+                android:id="@+id/txtAtencionItem"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="Apellido Materno"
+                android:text="Atención"
                 android:textColor="#1AEBB2"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtSexoItem"
+                android:id="@+id/txtOdontoItem"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="Sexo"
+                android:text="Odontólogo"
                 android:textColor="#1AEBB2"
                 android:textStyle="bold" />
-
             <TextView
-                android:id="@+id/txtFechaItem"
+                android:id="@+id/txtFechaCitaItem"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="Fecha de Nacimiento"
+                android:text="Fecha de Cita"
                 android:textColor="#1AEBB2"
                 android:textStyle="bold" />
-
             <TextView
-                android:id="@+id/txtEspeItem"
+                android:id="@+id/txtHoraItem"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="Especialidad"
-                android:textColor="#1AEBB2"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtDoctorItem"
-                android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:text="Doctor"
+                android:text="Hora de Cita"
                 android:textColor="#1AEBB2"
                 android:textStyle="bold" />
 
