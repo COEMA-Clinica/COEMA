@@ -1,4 +1,4 @@
-package com.example.coema.Login;
+/*package com.example.coema.Login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -139,3 +139,4 @@ public class ActPrincipalPaciente extends AppCompatActivity {
     }
 
 }
+*/

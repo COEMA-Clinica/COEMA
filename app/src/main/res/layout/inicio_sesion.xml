@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="">
+    android:background="#00FF00">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/coemaLogo" />
+                app:srcCompat="@drawable/coemalogo" />
 
             <TextView
                 android:id="@+id/textView"
@@ -53,7 +53,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
+                android:background="#00FF00"
                 android:ems="10"
                 android:hint="Ingrese su email"
                 android:inputType="textPersonName"
@@ -80,7 +80,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
+                android:background="#00FF00"
                 android:ems="10"
                 android:hint="Ingrese su contraseña"
                 android:inputType="textPassword"

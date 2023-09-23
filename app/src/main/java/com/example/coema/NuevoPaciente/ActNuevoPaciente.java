@@ -1,4 +1,4 @@
-package com.example.coema.NuevoPaciente;
+/*package com.example.coema.NuevoPaciente;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -150,3 +150,4 @@ public class ActNuevoPaciente extends AppCompatActivity {
 
     }
 }
+*/
