@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- COEMA_LOGO -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/coemalogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+    <!-- ImageView para el "Menu de Administrador" -->
+    <ImageView
+        android:id="@+id/adminImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/admin"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logoImageView"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Linear Layout para los botones (Imágenes Interactivas) -->
+    <LinearLayout
+        android:id="@+id/buttonsLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/adminImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp">
+
+        <!-- Opción 1: REGISTROS DE PAGOS -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/registrosDePagosImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/boleta"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recibo de Pagos"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Opción 2: EQUIPO MEDICO -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/equipoMedicoImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/odontologo"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Equipo Médico"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/menuAdminLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/logoImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:background="#000000">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Menu de Administrador"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</RelativeLayout>
