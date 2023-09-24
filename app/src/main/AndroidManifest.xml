@@ -25,11 +25,53 @@
 
         <!-- Desactivar otras actividades quitando las etiquetas <intent-filter> -->
         <activity
-            android:name=".Registro.RegistroPacientes"
-            android:exported="false"/> <!-- Configurado como "false" -->
+            android:name=".Admin.ActListarCitasAdmin"
+            android:exported="true"
+            tools:ignore = "Instantiatable" />
         <activity
-            android:name=".Perfil.PerfilPaciente"
-            android:exported="false"/> <!-- Configurado como "false" -->
+            android:name=".Listas.Citas"
+            android:exported="true"
+            tools:ignore = "Instantiatable" />
+        <activity
+            android:name=".Listas.Paciente"
+            android:exported="true"
+            tools:ignore = "Instantiatable" />
+        <activity
+            android:name=".Admin.ActListarPacientesAdmin"
+            android:exported="true"
+            tools:ignore = "Instantiatable" />
+        <activity
+            android:name=".Login.IniciarSesion"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".Index.ActPrincipalAdmin"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".Login.ActIniciarSesionAdmin"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".Index.ActPrincipalPaciente"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".Listas.ActListarCitas"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".ActNuevoPaciente"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".ActRegistrarCita"
+            android:exported="true"
+            tools:ignore = "Instantiatable"/>
+        <activity
+            android:name=".ActPrincipal"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
 
     </application>
 

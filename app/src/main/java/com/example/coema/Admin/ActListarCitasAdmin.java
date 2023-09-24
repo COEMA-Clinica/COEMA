@@ -1,4 +1,4 @@
-package com.example.coema.Listas;
+package com.example.coema.Admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,45 +13,35 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.coema.Fragments.FragmentItemCitas;
-import com.example.coema.Fragments.FragmentListarCitas;
-import com.example.coema.Fragments.IListarCitas;
-import com.example.coema.Index.ActPrincipalPaciente;
-import com.example.coema.Modelos.DAOCitas;
-import com.example.coema.R;
-import com.example.coema.RegistrarCitas.ActRegistrarCita;
-
 import java.util.ArrayList;
 
+import healthandtechnology.com.healthandtechnologyapp.modelos.DAOCitas;
 
+public class ActListarCitasAdmin extends AppCompatActivity implements IListarCitasAdmin {
+     FragementCitasListarAdmin fragementCitasListarAdmin;
+     FragmentCitasItemAdmin fragmentCitasItemAdmin;
+        ArrayList<Citas>listadoCitas =new ArrayList<>();
+        ArrayList<Paciente> listadoPaciente;
+        String pacActivo;
+        DAOCitas daoCitas=new DAOCitas(this);
 
-public class ActListarCitas extends AppCompatActivity implements IListarCitas {
-    FragmentListarCitas fragmentCitasListar;
-    FragmentItemCitas fragmentCitasItem;
-    ArrayList<Citas>listadoCitas;
-    ArrayList<Paciente> listadoPaciente;
-    String pacActivo;
-
-//DAOCitas daoCitas=new DAOCitas(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listar_cita_principal);
-
+        setContentView(R.layout.lyt_listar_citas__admin_principal);
         asignarReferencia();
+        daoCitas.openBD();
         recuperarData();
     }
 
     private void asignarReferencia() {
-        fragmentCitasListar=(FragmentListarCitas)getSupportFragmentManager().findFragmentById(R.id.fgtListarPrincipal) ;
-        fragmentCitasItem=(FragmentItemCitas) getSupportFragmentManager().findFragmentById(R.id.fgtItemPrin);
+        fragementCitasListarAdmin=(FragementCitasListarAdmin)getSupportFragmentManager().findFragmentById(R.id.fgtListarPrincipal) ;
+        fragmentCitasItemAdmin=(FragmentCitasItemAdmin)getSupportFragmentManager().findFragmentById(R.id.fgtItemPrin);
     }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_principal_listar,menu);
-        return super.onCreateOptionsMenu(menu);
+            getMenuInflater().inflate(R.menu.menu_principal_listar_admin,menu);
+            return super.onCreateOptionsMenu(menu);
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -62,18 +52,24 @@ public class ActListarCitas extends AppCompatActivity implements IListarCitas {
         Intent intent;
         switch (item.getItemId()){
             case R.id.mnu01D:
-                intent = new Intent(this, ActRegistrarCita.class);
+                intent = new Intent(this, ActListarPacientesAdmin.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return true;
+            case R.id.mnu03D:
+                intent = new Intent(this, ActInfoAdmin.class);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
             case R.id.mnu04D:
-                SharedPreferences sharedPref = this.getSharedPreferences("correo_electronico", Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = this.getSharedPreferences("correo-electronico", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
 
                 editor.clear();
                 editor.apply();
 
-                intent = new Intent(this, ActPrincipalPaciente.class);
+                intent = new Intent(this, ActPrincipal.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
@@ -89,25 +85,21 @@ public class ActListarCitas extends AppCompatActivity implements IListarCitas {
             Log.d("Status:","No hay datos registrados");
             Toast.makeText(this, "Falta registrar datos", Toast.LENGTH_SHORT).show();
         }else{
-
-            listadoCitas=(ArrayList<Citas>)bundle.getSerializable("dataCitas");
+            listadoCitas= daoCitas.getCitas();
             listadoPaciente = (ArrayList<Paciente>)  bundle.getSerializable("dataPaciente");
-            pacActivo = bundle.getString("pacActivo");
-
+            pacActivo=bundle.getString("pacActivo");
             Bundle listaCitasAdminFragment=new Bundle();
             listaCitasAdminFragment.putSerializable("dataCitas",listadoCitas);
             listaCitasAdminFragment.putSerializable("dataPaciente",listadoPaciente);
-            listaCitasAdminFragment.putSerializable("pacActivo", pacActivo);
-
-            fragmentCitasItem.setArguments(listaCitasAdminFragment);
-            fragmentCitasListar.setArguments(listaCitasAdminFragment);
-            fragmentCitasItem.setArguments(listaCitasAdminFragment);
+            listaCitasAdminFragment.putString("pacActivo", pacActivo);
+            fragementCitasListarAdmin.setArguments(listaCitasAdminFragment);
+            fragmentCitasItemAdmin.setArguments(listaCitasAdminFragment);
 
         }
     }
 
-    public void regresarMenuPrincipal(View view){
-        Intent intent= new Intent(this,ActPrincipalPaciente.class);
+    public void regresarMenuAdmin(View view){
+        Intent intent= new Intent(this,ActPrincipalAdmin.class);
         Bundle bundle= new Bundle();
         bundle.putSerializable("dataCitas",listadoCitas);
         bundle.putSerializable("dataPaciente", listadoPaciente);
@@ -117,11 +109,15 @@ public class ActListarCitas extends AppCompatActivity implements IListarCitas {
     }
 
     @Override
-    public void listarCitas(Citas citas) {
-        fragmentCitasItem.mostrarLista(citas);
+    public void mostrarListadoCitas(Citas citas){
+        fragmentCitasItemAdmin.mostrarCitasAdmin(citas);
     }
 
+    @Override
+    public void capturarId(Citas citas) {
+        fragmentCitasItemAdmin.capturaId(citas);
 
+        }
 
 
 }
