@@ -12,6 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coema.Fragments.FragmentPacienteItemAdmin;
+import com.example.coema.Fragments.FragmentPacienteListaAdmin;
+import com.example.coema.Fragments.IListarPacienteAdmin;
+import com.example.coema.Index.ActPrincipal;
+import com.example.coema.Listas.Citas;
+import com.example.coema.Listas.Paciente;
+import com.example.coema.Modelos.DAOPaciente;
+import com.example.coema.R;
+
 import java.util.ArrayList;
 
 import healthandtechnology.com.healthandtechnologyapp.modelos.DAOPaciente;
@@ -68,12 +77,6 @@ public class ActListarPacientesAdmin extends AppCompatActivity implements ILista
         switch (item.getItemId()){
             case R.id.mnu02D:
                 intent =new Intent(this, ActListarCitasAdmin.class);
-
-                intent.putExtras(bundle);
-                startActivity(intent);
-                return true;
-            case R.id.mnu03D:
-                intent = new Intent(this, ActInfoAdmin.class);
 
                 intent.putExtras(bundle);
                 startActivity(intent);

@@ -13,6 +13,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coema.Fragments.FragementCitasListarAdmin;
+import com.example.coema.Fragments.FragmentCitasItemAdmin;
+import com.example.coema.Fragments.IListarCitasAdmin;
+import com.example.coema.Listas.Citas;
+import com.example.coema.Listas.Paciente;
+import com.example.coema.R;
+
 import java.util.ArrayList;
 
 import healthandtechnology.com.healthandtechnologyapp.modelos.DAOCitas;
@@ -29,7 +36,7 @@ public class ActListarCitasAdmin extends AppCompatActivity implements IListarCit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lyt_listar_citas__admin_principal);
+        setContentView(R.layout.listar_citas__admin_principal);
         asignarReferencia();
         daoCitas.openBD();
         recuperarData();
