@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
 import com.example.coema.Login.ActIniciarSesionAdmin;
+import com.example.coema.Login.ActNuevoPaciente;
 import com.example.coema.Modelos.DAOCitas;
 import com.example.coema.Modelos.DAOPaciente;
 import com.example.coema.R;

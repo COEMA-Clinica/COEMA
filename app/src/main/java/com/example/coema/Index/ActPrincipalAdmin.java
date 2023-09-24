@@ -11,6 +11,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coema.Admin.ActListarCitasAdmin;
+import com.example.coema.Admin.ActListarPacientesAdmin;
+import com.example.coema.R;
+
 import java.util.ArrayList;
 
 public class ActPrincipalAdmin extends AppCompatActivity {
@@ -19,7 +23,7 @@ public class ActPrincipalAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lyt_admin_principal);
+        setContentView(R.layout.admin_principal);
         recuperarData();
     }
 
