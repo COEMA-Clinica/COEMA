@@ -1,5 +1,8 @@
 package com.example.coema.Admin;
 
+import static com.example.coema.R.id.mnu03D;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,13 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coema.Fragments.FragementCitasListarAdmin;
 import com.example.coema.Fragments.FragmentCitasItemAdmin;
 import com.example.coema.Fragments.IListarCitasAdmin;
+import com.example.coema.Index.ActPrincipal;
+import com.example.coema.Index.ActPrincipalAdmin;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
+import com.example.coema.Modelos.DAOCitas;
 import com.example.coema.R;
 
 import java.util.ArrayList;
 
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOCitas;
 
 public class ActListarCitasAdmin extends AppCompatActivity implements IListarCitasAdmin {
      FragementCitasListarAdmin fragementCitasListarAdmin;
@@ -50,6 +55,7 @@ public class ActListarCitasAdmin extends AppCompatActivity implements IListarCit
             getMenuInflater().inflate(R.menu.menu_principal_listar_admin,menu);
             return super.onCreateOptionsMenu(menu);
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Bundle bundle=new Bundle();
@@ -106,7 +112,7 @@ public class ActListarCitasAdmin extends AppCompatActivity implements IListarCit
     }
 
     public void regresarMenuAdmin(View view){
-        Intent intent= new Intent(this,ActPrincipalAdmin.class);
+        Intent intent= new Intent(this, ActPrincipalAdmin.class);
         Bundle bundle= new Bundle();
         bundle.putSerializable("dataCitas",listadoCitas);
         bundle.putSerializable("dataPaciente", listadoPaciente);

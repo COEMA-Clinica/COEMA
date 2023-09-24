@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#273C6A">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="413dp"
@@ -32,7 +31,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/coemalogo" />
 
             <LinearLayout
                 android:layout_width="match_parent"

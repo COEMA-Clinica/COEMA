@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.coema.Listas.Paciente;
+import com.example.coema.Util.BDPaciente;
+import com.example.coema.Util.ConstantesPaciente;
+
 import java.util.ArrayList;
 
 public class DAOPaciente {

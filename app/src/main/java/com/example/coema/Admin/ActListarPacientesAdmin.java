@@ -16,6 +16,7 @@ import com.example.coema.Fragments.FragmentPacienteItemAdmin;
 import com.example.coema.Fragments.FragmentPacienteListaAdmin;
 import com.example.coema.Fragments.IListarPacienteAdmin;
 import com.example.coema.Index.ActPrincipal;
+import com.example.coema.Index.ActPrincipalAdmin;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
 import com.example.coema.Modelos.DAOPaciente;
@@ -23,7 +24,6 @@ import com.example.coema.R;
 
 import java.util.ArrayList;
 
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOPaciente;
 
 public class ActListarPacientesAdmin extends AppCompatActivity implements IListarPacienteAdmin {
     ArrayList<Paciente>listaPacientes;
@@ -38,7 +38,7 @@ public class ActListarPacientesAdmin extends AppCompatActivity implements ILista
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lyt_listar_pacientes_admin);
+        setContentView(R.layout.listar_pacientes_admin);
         asignarReferencia();
         daoPaciente.openBD();
         recuperarData();
@@ -81,6 +81,8 @@ public class ActListarPacientesAdmin extends AppCompatActivity implements ILista
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
+            case R.id.mnu03D:
+                return true;
             case R.id.mnu04D:
                 SharedPreferences sharedPref = this.getSharedPreferences("correo_electronico", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
@@ -103,7 +105,7 @@ public class ActListarPacientesAdmin extends AppCompatActivity implements ILista
     }
 
     public void regresarMenuAdminCitas(View view){
-        Intent intent= new Intent(this,ActPrincipalAdmin.class);
+        Intent intent= new Intent(this, ActPrincipalAdmin.class);
         Bundle bundle= new Bundle();
         bundle.putSerializable("dataPaciente",listaPacientes);
         bundle.putSerializable("dataCitas",listaCita);

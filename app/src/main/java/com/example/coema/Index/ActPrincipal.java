@@ -21,8 +21,6 @@ import com.example.coema.R;
 
 import java.util.ArrayList;
 
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOCitas;
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOPaciente;
 
 public class ActPrincipal extends AppCompatActivity {
     ArrayList<Paciente>listaPaciente;

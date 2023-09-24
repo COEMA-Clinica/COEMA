@@ -9,6 +9,6 @@
         android:id="@+id/mnu02D"
         android:title="TUS CITAS" />
     <item
-        android:id="@+id/mnu04D"
+        android:id="@+id/mnu03D"
         android:title="CERRAR SESIÓN" />
 </menu>

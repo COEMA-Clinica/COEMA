@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Admin.ActListarCitasAdmin;
 import com.example.coema.Admin.ActListarPacientesAdmin;
+import com.example.coema.Listas.Citas;
+import com.example.coema.Listas.Paciente;
 import com.example.coema.R;
 
 import java.util.ArrayList;
@@ -58,7 +60,7 @@ public class ActPrincipalAdmin extends AppCompatActivity {
 
 
     public void nosotrosPrincipalAdmin(View view) {
-        Intent intent = new Intent(this, ActInfoAdmin.class);
+        Intent intent = new Intent(this, ActPrincipal.class);
         Bundle bundle=new Bundle();
         bundle.putSerializable("dataPaciente",listaPaciente);
         bundle.putSerializable("dataCitas", listaCita);
@@ -91,10 +93,6 @@ public class ActPrincipalAdmin extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.mnu03D:
-                intent = new Intent(this, ActInfoAdmin.class);
-
-                intent.putExtras(bundle);
-                startActivity(intent);
                 return true;
             case R.id.mnu04D:
                 SharedPreferences sharedPref = this.getSharedPreferences("correo_electronico", Context.MODE_PRIVATE);

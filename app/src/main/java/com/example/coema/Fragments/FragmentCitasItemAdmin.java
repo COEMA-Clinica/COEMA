@@ -14,14 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.coema.Admin.DialogoAlertaEditarCit;
+import com.example.coema.Admin.DialogoAlertaEliminarCit;
 import com.example.coema.Index.ActPrincipalAdmin;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
+import com.example.coema.Modelos.DAOCitas;
 import com.example.coema.R;
 
 import java.util.ArrayList;
 
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOCitas;
 
 public class FragmentCitasItemAdmin extends Fragment {
      TextView txtNom,txtApeP,txtApeM,txtSexo,txtFecha,txtClinica,txtEspecialidad,txtDocto;
@@ -104,10 +106,6 @@ public class FragmentCitasItemAdmin extends Fragment {
                 cita.setApeMat(txtApeM.getText().toString());
 
                 cita.setApePat(txtApeP.getText().toString());
-                cita.setDoc(txtDocto.getText().toString());
-
-                cita.setClin(txtClinica.getText().toString());
-                cita.setEsp(txtEspecialidad.getText().toString());
 
                 cita.setFecCit(txtFecha.getText().toString());
                 cita.setSexo(txtSexo.getText().toString());
@@ -141,9 +139,6 @@ public class FragmentCitasItemAdmin extends Fragment {
         txtApeM.setText(citas.getApeMat());
         txtApeP.setText(citas.getApePat());
         txtSexo.setText(citas.getSexo());
-        txtClinica.setText(citas.getClin());
-        txtEspecialidad.setText(citas.getEsp());
-        txtDocto.setText(citas.getDoc());
         txtFecha.setText(citas.getFecCit());
 
     }

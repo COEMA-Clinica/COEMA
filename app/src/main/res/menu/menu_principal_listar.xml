@@ -6,6 +6,6 @@
         android:id="@+id/mnu01D"
         android:title="REGISTRAR NUEVA CITA" />
     <item
-        android:id="@+id/mnu04D"
+        android:id="@+id/mnu03D"
         android:title="CERRAR SESIÓN" />
 </menu>

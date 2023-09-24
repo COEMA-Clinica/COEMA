@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
     android:clickable="false"
     android:onClick="fechaNacimiento">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,10 +22,10 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imageView6"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/coemaLogo" />
+                app:srcCompat="@drawable/coemalogo" />
 
             <TextView
                 android:id="@+id/textView"
@@ -58,7 +56,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su nombre"
                 android:inputType="textPersonName"
@@ -85,7 +82,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
                 android:clickable="true"
                 android:ems="10"
                 android:focusable="false"
@@ -115,7 +111,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su email"
                 android:inputType="textPersonName"
@@ -142,7 +137,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su contraseña"
                 android:inputType="textPassword"

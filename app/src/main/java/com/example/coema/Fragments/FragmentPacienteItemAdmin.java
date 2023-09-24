@@ -14,13 +14,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.coema.Admin.DialogoAlertaEditarPac;
+import com.example.coema.Admin.DialogoAlertaEliminarPac;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
+import com.example.coema.Modelos.DAOPaciente;
 import com.example.coema.R;
 
 import java.util.ArrayList;
 
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOPaciente;
 
 public class FragmentPacienteItemAdmin extends Fragment {
     EditText txtCor, txtNom;

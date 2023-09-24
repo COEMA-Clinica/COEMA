@@ -22,7 +22,6 @@ import com.example.coema.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import healthandtechnology.com.healthandtechnologyapp.modelos.DAOPaciente;
 
 public class ActNuevoPaciente extends AppCompatActivity {
     ArrayList<Paciente> listaPaciente;
