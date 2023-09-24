@@ -154,40 +154,18 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/textView91"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Clínica:"
-                android:textColor="#1AEBB2"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/sprClinCita"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background=""
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-            <TextView
                 android:id="@+id/textView911"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Especialidad:"
+                android:text="Atención:"
                 android:textColor="#1AEBB2"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/sprEspCita"
+                android:id="@+id/sprAteCita"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -203,13 +181,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Doctor:"
+                android:text="Odontólogo:"
                 android:textColor="#1AEBB2"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/sprDocCita"
+                android:id="@+id/sprOdoCita"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"

@@ -36,16 +36,15 @@ public class ActRegistrarCita extends AppCompatActivity {
     ArrayList<Paciente> listaPaciente;
     String pacActivo;
     EditText edtNomCita,edtApePatCita,edtApeMatCita,edtFecCita;
-    Spinner sprClinCita,sprEspCita,sprDocCita,sprSexoCita;
+    Spinner sprAteCita,sprOdoCita,sprSexoCita;
     DAOCitas daoCitas=new DAOCitas(this);
     int aActual, dActual, mActual;
     int fecA, fecM, fecD;
 
     Button btnRegistrarCita;
     String sexo[]={"HOMBRE","MUJER"};
-    String clinicas[]={"CAYETASI HERRERA","RICARDO FLORES","SAN BENITO"};
-    String especialidad[]={"ANESTESIOLOGÍA","CARDIO PEDIATRÍA","CIRUGÍA CABEZA-CUELLO","CIRUGÍA GENERAL"};
-    String doctores[]={"DUEÑAS CARBAJAL, ROY","MEDINA PALOMINA, FELIX","TELEZ FARFAN, DAVID","RODRIGUEZ VALENCIA, GERMAN"};
+    String atencion[]={"ANESTESIOLOGÍA","CARDIO PEDIATRÍA","CIRUGÍA CABEZA-CUELLO","CIRUGÍA GENERAL"};
+    String odontologos[]={"DUEÑAS CARBAJAL, ROY","MEDINA PALOMINA, FELIX","TELEZ FARFAN, DAVID","RODRIGUEZ VALENCIA, GERMAN"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class ActRegistrarCita extends AppCompatActivity {
         btnRegistrarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nomCita,apePa,apeMa,fec,clini,esp,doc,sexo, correo;
+                String nomCita,apePa,apeMa,fec,clini = null,esp,doc,sexo, correo;
                 int idFoto=0;
 
                 nomCita="Nombre: "+edtNomCita.getText().toString();
@@ -66,9 +65,8 @@ public class ActRegistrarCita extends AppCompatActivity {
                 apeMa="Apellido Materno: "+edtApeMatCita.getText().toString();
                 fec="Fecha: "+edtFecCita.getText().toString();
                 sexo="Sexo: "+sprSexoCita.getSelectedItem().toString();
-                clini="Clínica: "+sprClinCita.getSelectedItem().toString();
-                doc="Doctor: "+sprDocCita.getSelectedItem().toString();
-                esp="Especialidad: "+sprEspCita.getSelectedItem().toString();
+                doc="Odontólogo: "+sprOdoCita.getSelectedItem().toString();
+                esp="Atención: "+sprAteCita.getSelectedItem().toString();
                 correo = pacActivo;
                 if (sprSexoCita.getSelectedItem().toString().equals("HOMBRE")){
                     idFoto= R.drawable.hombre;
@@ -104,18 +102,15 @@ public class ActRegistrarCita extends AppCompatActivity {
         edtApeMatCita=findViewById(R.id.edtApeMatCita);
         edtApePatCita=findViewById(R.id.edtApePatCita);
         edtFecCita=findViewById(R.id.edtFecCita);
-        sprClinCita=findViewById(R.id.sprClinCita);
-        sprEspCita=findViewById(R.id.sprEspCita);
-        sprDocCita=findViewById(R.id.sprDocCita);
+        sprAteCita=findViewById(R.id.sprAteCita);
+        sprOdoCita=findViewById(R.id.sprOdoCita);
         sprSexoCita=findViewById(R.id.sprSexoCita);
         ArrayAdapter adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sexo);
         sprSexoCita.setAdapter(adapter);
-        ArrayAdapter adapterA=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,clinicas);
-        sprClinCita.setAdapter(adapterA);
-        ArrayAdapter adapterB=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,especialidad);
-        sprEspCita.setAdapter(adapterB);
-        ArrayAdapter adapterC=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,doctores);
-        sprDocCita.setAdapter(adapterC);
+        ArrayAdapter adapterB=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,atencion);
+        sprAteCita.setAdapter(adapterB);
+        ArrayAdapter adapterC=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,odontologos);
+        sprOdoCita.setAdapter(adapterC);
 
         btnRegistrarCita = findViewById(R.id.btnRegCita);
     }

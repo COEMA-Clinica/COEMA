@@ -66,7 +66,7 @@ public class ActListarCitas extends AppCompatActivity implements IListarCitas {
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
-            case R.id.mnu0  4D:
+            case R.id.mnu04D:
                 SharedPreferences sharedPref = this.getSharedPreferences("correo_electronico", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
 
