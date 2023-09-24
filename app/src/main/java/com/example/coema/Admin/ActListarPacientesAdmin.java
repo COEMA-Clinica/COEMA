@@ -70,34 +70,36 @@ public class ActListarPacientesAdmin extends AppCompatActivity implements ILista
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("dataPaciente",listaPacientes);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("dataPaciente", listaPacientes);
         bundle.putSerializable("dataCitas", listaCita);
-        Intent intent;
-        switch (item.getItemId()){
-            case R.id.mnu02D:
-                intent =new Intent(this, ActListarCitasAdmin.class);
 
+        Intent intent;
+
+        switch (item.getItemId()) {
+            case R.id.mnu02D:
+                intent = new Intent(this, ActListarCitasAdmin.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
+
             case R.id.mnu03D:
-                return true;
             case R.id.mnu04D:
+                // Limpiar la preferencia compartida
                 SharedPreferences sharedPref = this.getSharedPreferences("correo_electronico", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-
                 editor.clear();
                 editor.apply();
 
+                // Iniciar la actividad principal
                 intent = new Intent(this, ActPrincipal.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
     private void asignarReferencia() {
         fragmentPacienteItemAdmin = (FragmentPacienteItemAdmin) getSupportFragmentManager().findFragmentById(R.id.fgtItemPacAdm);
