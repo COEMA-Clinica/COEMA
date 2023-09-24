@@ -37,7 +37,7 @@ public class ActRegistrarCita extends AppCompatActivity {
     String pacActivo;
     EditText edtNomCita,edtApePatCita,edtApeMatCita,edtFecCita;
     Spinner sprAteCita,sprOdoCita,sprSexoCita;
-    DAOCitas daoCitas=new DAOCitas(this);
+    //DAOCitas daoCitas=new DAOCitas(this);
     int aActual, dActual, mActual;
     int fecA, fecM, fecD;
 
@@ -124,7 +124,7 @@ public class ActRegistrarCita extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Bundle bundle=new Bundle();
         bundle.putSerializable("dataPaciente",listaPaciente);
-        bundle.putSerializable("dataCitas", daoCitas.getCitas());
+        //bundle.putSerializable("dataCitas", daoCitas.getCitas());
         bundle.putString("pacActivo", pacActivo);
         Intent intent;
         switch (item.getItemId()){
