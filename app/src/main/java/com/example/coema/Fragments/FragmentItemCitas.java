@@ -15,7 +15,7 @@ import com.example.coema.Listas.Citas;
 import com.example.coema.R;
 
 public class FragmentItemCitas extends Fragment {
-    TextView txtNom,txtApeP,txtFechaCita,txtOdonto,txtHora,txtAtencion;
+    TextView txtNom,txtApeP,txtFechaCita,txtOdonto,txtHora,txtTrat;
     ImageView imgFotos;
 
     @Nullable
@@ -31,7 +31,7 @@ public class FragmentItemCitas extends Fragment {
         imgFotos= getView().findViewById(R.id.imgFoto);
         txtNom=getView().findViewById(R.id.txtNomItem);
         txtApeP=getView().findViewById(R.id.txtApePaItem);
-        txtAtencion=getView().findViewById(R.id.txtAtencionItem);
+        txtTrat=getView().findViewById(R.id.txtTratItem);
         txtOdonto=getView().findViewById(R.id.txtOdontoItem);
         txtFechaCita=getView().findViewById(R.id.txtFechaCitaItem);
         txtHora=getView().findViewById(R.id.txtHoraItem);
@@ -43,7 +43,7 @@ public class FragmentItemCitas extends Fragment {
         imgFotos.setImageResource(citas.getIdFoto());
         txtNom.setText(citas.getNom());
         txtApeP.setText(citas.getApePat());
-        txtAtencion.setText(citas.getAte());
+        txtTrat.setText(citas.getTrat());
         txtOdonto.setText(citas.getOdo());
         txtFechaCita.setText(citas.getFecCit());
         txtHora.setText(citas.getHor());

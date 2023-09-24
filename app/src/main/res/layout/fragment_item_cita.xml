@@ -38,10 +38,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtAtencionItem"
+                android:id="@+id/txtTratItem"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="Atención"
+                android:text="Tratamiento"
                 android:textColor="#1AEBB2"
                 android:textStyle="bold" />
 

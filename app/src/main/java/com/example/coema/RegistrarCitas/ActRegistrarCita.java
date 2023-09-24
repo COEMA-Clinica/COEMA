@@ -24,7 +24,6 @@ import com.example.coema.Index.ActPrincipalPaciente;
 import com.example.coema.Listas.ActListarCitas;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
-import com.example.coema.Modelos.DAOCitas;
 import com.example.coema.R;
 
 import java.util.ArrayList;
@@ -102,7 +101,7 @@ public class ActRegistrarCita extends AppCompatActivity {
         edtApeMatCita=findViewById(R.id.edtApeMatCita);
         edtApePatCita=findViewById(R.id.edtApePatCita);
         edtFecCita=findViewById(R.id.edtFecCita);
-        sprAteCita=findViewById(R.id.sprAteCita);
+        sprAteCita=findViewById(R.id.sprTratCita);
         sprOdoCita=findViewById(R.id.sprOdoCita);
         sprSexoCita=findViewById(R.id.sprSexoCita);
         ArrayAdapter adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sexo);

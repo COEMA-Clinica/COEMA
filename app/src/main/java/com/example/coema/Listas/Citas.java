@@ -6,13 +6,13 @@ public class Citas implements Serializable {
 
 
     private int id_foto, id;
-    private String nom, odo, ate, hor, fecCit, apePat, apeMat, sexo, correo;
+    private String nom, odo, trat, hor, fecCit, apePat, apeMat, sexo, correo;
 
-    public Citas(int id_foto, String nom, String odo, String ate, String hor, String fecCit, String apePat, String apeMat, String sexo, String correo) {
+    public Citas(int id_foto, String nom, String odo, String trat, String hor, String fecCit, String apePat, String apeMat, String sexo, String correo) {
         this.id_foto = id_foto;
         this.nom = nom;
         this.odo = odo;
-        this.ate = ate;
+        this.trat = trat;
         this.hor = hor;
         this.fecCit = fecCit;
         this.apePat = apePat;
@@ -22,12 +22,12 @@ public class Citas implements Serializable {
 
     }
 
-    public Citas(int id, int id_foto, String nom, String odo, String ate, String hor, String fecCit, String apePat, String apeMat, String sexo, String correo) {
+    public Citas(int id, int id_foto, String nom, String odo, String trat, String hor, String fecCit, String apePat, String apeMat, String sexo, String correo) {
         this.id = id;
         this.id_foto = id_foto;
         this.nom = nom;
         this.odo = odo;
-        this.ate = ate;
+        this.trat = trat;
         this.hor = hor;
         this.fecCit = fecCit;
         this.apePat = apePat;
@@ -73,12 +73,12 @@ public class Citas implements Serializable {
         this.odo = odo;
     }
 
-    public String getAte() {
-        return ate;
+    public String getTrat() {
+        return trat;
     }
 
-    public void setAte(String ate) {
-        this.ate = ate;
+    public void setTrat(String trat) {
+        this.trat = trat;
     }
 
     public String getHor() {

@@ -30,7 +30,7 @@ public class DialogoAlertaRegistrarCita extends DialogFragment {
         edtFecCita = getActivity().findViewById(R.id.edtFecCita);
         sprSexoCita = getActivity().findViewById(R.id.sprSexoCita);
         sprClinCita = getActivity().findViewById(R.id.sprClinCita);
-        sprEspCita =getActivity().findViewById(R.id.sprAteCita);
+        sprEspCita =getActivity().findViewById(R.id.sprTratCita);
         sprDocCita = getActivity().findViewById(R.id.sprOdoCita);
 
 
