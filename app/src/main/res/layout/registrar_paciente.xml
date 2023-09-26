@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="false"
-    android:onClick="fechaNacimiento">
+    tools:context=".Registro.RegistroPacientes"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,10 +17,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                app:srcCompat="@drawable/coemalogo" />
+                android:layout_height="180dp"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -39,7 +33,59 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Nombres:"
+                android:textColor="#1AEBB2"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtNomR"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:ems="10"
+                android:hint="Ingrese su nombre"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="#5F5F5F"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Apellidos:"
+                android:textColor="#1AEBB2"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtApeR"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:ems="10"
+                android:hint="Ingrese su apellido"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="#5F5F5F"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -50,17 +96,17 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/txtNomte"
+                android:id="@+id/txtDniR"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:ems="10"
-                android:hint="Ingrese su nombre"
-                android:inputType="textPersonName"
+                android:hint="Ingrese su dni o carnet de extranjeria"
+                android:inputType="text|number"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -84,14 +130,12 @@
                 android:layout_marginEnd="32dp"
                 android:clickable="true"
                 android:ems="10"
-                android:focusable="false"
-                android:inputType="date"
+                android:inputType="textPersonName"
                 android:onClick="fechaNacimiento"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
-                android:textSize="17sp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -113,9 +157,9 @@
                 android:layout_marginEnd="32dp"
                 android:ems="10"
                 android:hint="Ingrese su email"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -141,7 +185,33 @@
                 android:hint="Ingrese su contraseña"
                 android:inputType="textPassword"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:textColorHint="#5F5F5F"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Telefono:"
+                android:textColor="#1AEBB2"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtTelR"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:ems="10"
+                android:hint="Ingrese su telefono"
+                android:inputType="text|number"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -156,36 +226,14 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <RadioGroup
+            <Spinner
+                android:id="@+id/spnSexR"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RadioButton
-                    android:id="@+id/R"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:text="Hombre"
-                    android:textColor="#1AEBB2"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:buttonTint="#1AEBB2" />
-
-                <RadioButton
-                    android:id="@+id/rdbMujerR"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:text="Mujer"
-                    android:textColor="#1AEBB2"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:buttonTint="#1AEBB2" />
-            </RadioGroup>
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btnRegistrar"
@@ -214,4 +262,4 @@
 
         </LinearLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

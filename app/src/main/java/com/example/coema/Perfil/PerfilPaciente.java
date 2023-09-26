@@ -31,6 +31,14 @@ public class PerfilPaciente extends AppCompatActivity {
 
     }
     //try
+    private void recuperarData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            int idPaciente = bundle.getInt("data");
+            // Ahora tienes el valor idPaciente que pasaste desde la actividad anterior
+            // Puedes usarlo como sea necesario en esta actividad
+        }
+    }
 
 
 }

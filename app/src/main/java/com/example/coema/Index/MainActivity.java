@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coema.Login.IniciarSesion;
 import com.example.coema.R;
 import com.example.coema.Registro.RegistroPacientes;
 import com.example.coema.Conection.DatabaseConnection;
@@ -27,17 +28,21 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLogin =(Button) findViewById(R.id.btnLogin);
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iReg = new Intent(MainActivity.this, RegistroPacientes.class);
+                startActivity(iReg);;
+            }
+        });
 
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iInfo = new Intent(MainActivity.this, IniciarSesion.class);
+                startActivity(iInfo);;
+            }
+        });
     }
 
-    //Metodos para cambiar de layout
-    public void Register(View view){
-        Intent iReg = new Intent(this, RegistroPacientes.class);
-        startActivity(iReg);
-    }
-
-    public void Login(View view){
-        Intent iInfo = new Intent(this, RegistroPacientes.class);
-        startActivity(iInfo);
-    }
 }

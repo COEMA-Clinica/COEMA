@@ -3,46 +3,19 @@ package com.example.coema.Listas;
 import java.io.Serializable;
 
 public class Paciente implements Serializable {
-    private String nombre, correo, contra, fecha, sexo;
+    private String nombre, apellido, correo, contra, telefono, fecNac, sexo;
     private int id_foto, id;
 
-    public Paciente(int id_foto, String nombre, String correo, String contra, String fecha, String sexo) {
-        this.id_foto=id_foto;
+    public Paciente(String nombre, String apellido, String correo, String contra, String telefono, String fecNac, String sexo, int id_foto, int id) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.correo = correo;
         this.contra = contra;
-        this.fecha = fecha;
-        this.sexo = sexo;
-    }
-
-    public Paciente(int id, String nombre, String correo, String contra, String fecha, String sexo, int id_foto) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.contra = contra;
-        this.fecha = fecha;
+        this.telefono = telefono;
+        this.fecNac = fecNac;
         this.sexo = sexo;
         this.id_foto = id_foto;
         this.id = id;
-    }
-
-    public Paciente(){
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdFoto() {
-        return id_foto;
-    }
-
-    public void setIdFoto(int id_foto) {
-        this.id_foto = id_foto;
     }
 
     public String getNombre() {
@@ -51,6 +24,14 @@ public class Paciente implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCorreo() {
@@ -69,12 +50,20 @@ public class Paciente implements Serializable {
         this.contra = contra;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getFecNac() {
+        return fecNac;
+    }
+
+    public void setFecNac(String fecNac) {
+        this.fecNac = fecNac;
     }
 
     public String getSexo() {
@@ -84,4 +73,21 @@ public class Paciente implements Serializable {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    public int getId_foto() {
+        return id_foto;
+    }
+
+    public void setId_foto(int id_foto) {
+        this.id_foto = id_foto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
+

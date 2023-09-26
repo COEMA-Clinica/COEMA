@@ -8,10 +8,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.coema.Index.ActPrincipalAdmin;
+
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
 import com.example.coema.R;
+import com.example.coema.Registro.RegistroPacientes;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class ActIniciarSesionAdmin extends AppCompatActivity {
 
         if(registrado)
         {
-            Intent intent = new Intent(this, ActPrincipalAdmin.class);
+            Intent intent = new Intent(this, ActIniciarSesionAdmin.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("dataPaciente", listaPaciente);
             bundle.putSerializable("dataCitas", listaCita);
@@ -75,7 +76,7 @@ public class ActIniciarSesionAdmin extends AppCompatActivity {
     }
 
     public void redRegistrar(View view){
-        Intent intent = new Intent(this, ActNuevoPaciente.class);
+        Intent intent = new Intent(this, RegistroPacientes.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("dataPaciente", listaPaciente);
         bundle.putSerializable("dataCitas", listaCita);
