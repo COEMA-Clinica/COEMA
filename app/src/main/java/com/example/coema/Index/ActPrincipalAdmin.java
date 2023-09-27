@@ -1,4 +1,4 @@
-package com.example.coema.Index;
+/* package com.example.coema.Index;
 
 import android.content.Context;
 import android.content.Intent;
@@ -121,3 +121,4 @@ public class ActPrincipalAdmin extends AppCompatActivity {
         }
     }
 }
+*/

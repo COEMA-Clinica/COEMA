@@ -1,4 +1,4 @@
-package com.example.coema.Admin;
+/*package com.example.coema.Admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -129,3 +129,4 @@ public class ActListarPacientesAdmin extends AppCompatActivity implements ILista
 
 
 }
+*/

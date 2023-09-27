@@ -1,4 +1,4 @@
-package com.example.coema.RegistrarCitas;
+/* package com.example.coema.RegistrarCitas;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -206,3 +206,4 @@ public class ActRegistrarCita extends AppCompatActivity {
 
 
 }
+*/

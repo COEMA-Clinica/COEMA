@@ -1,4 +1,4 @@
-package com.example.coema.Index;
+/* package com.example.coema.Index;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -120,3 +120,4 @@ public class ActPrincipalPaciente extends AppCompatActivity{
     }
 
 }
+*/

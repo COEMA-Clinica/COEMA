@@ -1,4 +1,4 @@
-package com.example.coema.Fragments;
+/* package com.example.coema.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -149,3 +149,4 @@ public class FragmentCitasItemAdmin extends Fragment {
     }
 
 }
+*/

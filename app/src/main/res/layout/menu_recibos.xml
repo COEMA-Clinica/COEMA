@@ -11,61 +11,99 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"/>
 
-    <LinearLayout
-        android:id="@+id/menuAdminLinearLayout"
-        android:layout_width="match_parent"
+    <!-- Título de la página -->
+    <TextView
+        android:id="@+id/pageTitleTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@id/logoImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:background="#000000">
+        android:text="Historial de Pagos"
+        android:textColor="#000000" />
 
+    <!-- Contenedor de desplazamiento -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/pageTitleTextView"
+        android:fillViewport="true">
 
-        <TextView
+        <!-- Contenido de la lista de recibos -->
+        <LinearLayout
+            android:id="@+id/receiptsLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:text="Recibo de Pagos"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="8dp">
 
+            <!-- Cabecera de columna -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <!-- CheckBox -->
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tam"
+                    android:layout_weight="1"
+                    android:padding="8dp"/>
+
+                <!-- Nombre del recibo -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nombre"
+                    android:padding="8dp" />
+
+                <!-- Fecha -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha"
+                    android:padding="8dp" />
+
+                <!-- Monto -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monto"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- RecyclerView para mostrar los recibos -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Botones fuera de receiptsLinearLayout -->
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/menuAdminLinearLayout"
-        android:layout_centerHorizontal="true">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
 
-    <CheckBox
-        android:id="@+id/selectCheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
+        <!-- Botón "Editar Historial" -->
+        <Button
+            android:id="@+id/editHistoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Historial"
+            android:layout_marginEnd="16dp" />
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Nombre del Recibo"
-        android:padding="8dp"/>
-
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha"
-        android:padding="8dp"/>
-
-    <TextView
-        android:id="@+id/amountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monto"
-        android:padding="8dp"/>
-</LinearLayout>
-    </RelativeLayout>
+        <!-- Botón "Agregar Pago" -->
+        <Button
+            android:id="@+id/addPaymentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar Pago" />
+    </LinearLayout>
+</RelativeLayout>

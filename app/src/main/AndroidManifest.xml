@@ -15,16 +15,27 @@
 
         <!-- Configurar la actividad de inicio de sesión como actividad principal -->
         <activity
-            android:name=".Login.IniciarSesion"
+            android:name=".Index.ActMenuAdmin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Desactivar otras actividades quitando las etiquetas <intent-filter> -->
         <activity
+            android:name=".Index.MenuRecibosActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Registro.RegitroPago"
+            android:label="Registro de Pago">
+        </activity>
+        <activity
+            android:name=".Registro.RegistroPagoEdit"
+            android:label="Editar Pago">
+        </activity>
+        <!-- Desactivar otras actividades quitando las etiquetas <intent-filter> -->
+        <!-- <activity
             android:name=".Admin.ActListarCitasAdmin"
             android:exported="true"
             tools:ignore = "Instantiatable" />
@@ -68,7 +79,7 @@
             android:name=".Index.ActPrincipal"
             android:exported="true"
             android:theme="@style/Theme.COEMA"/>
-
+        -->
     </application>
 
 </manifest>

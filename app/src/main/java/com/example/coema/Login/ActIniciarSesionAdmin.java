@@ -1,4 +1,4 @@
-package com.example.coema.Login;
+/* package com.example.coema.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -93,3 +93,4 @@ public class ActIniciarSesionAdmin extends AppCompatActivity {
         startActivity(intent);
     }
 }
+*/
