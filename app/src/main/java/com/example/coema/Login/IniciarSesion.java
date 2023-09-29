@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Conection.DatabaseConnection;
-import com.example.coema.Index.ActPrincipalPaciente;
 import com.example.coema.Index.MainActivity;
 import com.example.coema.Listas.Citas;
 import com.example.coema.Listas.Paciente;
@@ -77,25 +76,6 @@ public class IniciarSesion extends AppCompatActivity {
 
         return false;
     }
-    public void iniciarSesion(View view){
-        String correo = txtCorreo.getText().toString();
-        String contra = txtContra.getText().toString();
-        Boolean registrado = verificarRegistro(correo, contra);
-
-        if(registrado){
-            Intent intent = new Intent(this, ActPrincipalPaciente.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("dataCitas", listaCita);
-            bundle.putSerializable("dataPaciente", listaPaciente);
-            bundle.putString("pacActivo", correo);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(this, "El correo o la contraseña son incorrectos", Toast.LENGTH_LONG).show();
-        }
-    }
 
     private void recuperarData() {
         Bundle bundle = getIntent().getExtras();
@@ -109,21 +89,7 @@ public class IniciarSesion extends AppCompatActivity {
     }
 
 
-    public void redRegistrar(View view){
-        Intent intent = new Intent(this, ActNuevoPaciente.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("dataPaciente", listaPaciente);
-        bundle.putSerializable("dataCitas", listaCita);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
 
-    public void redIniciarSesionAdmin(View view){
-        Intent intent = new Intent(this, ActIniciarSesionAdmin.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("dataPaciente", listaPaciente);
-        bundle.putSerializable("dataCitas", listaCita);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
+
+
 }
