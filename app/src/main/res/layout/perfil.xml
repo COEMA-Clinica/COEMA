@@ -70,6 +70,12 @@
         android:layout_height="wrap_content"
         android:hint="Número de Teléfono"
         android:inputType="phone" />
+    <EditText
+        android:id="@+id/editTextDocumento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Historial Médico"
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/btnSave"
