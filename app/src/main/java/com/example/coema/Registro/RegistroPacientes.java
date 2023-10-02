@@ -2,6 +2,7 @@ package com.example.coema.Registro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coema.Conection.DatabaseConnection;
@@ -27,6 +29,7 @@ public class RegistroPacientes extends AppCompatActivity {
 
     //Declaracion de variables
     EditText edtNom, edtApe, edtCor, edtCon, edtDni, edtTel, edtFec;
+    TextView txtYaTienesCuenta;
     Spinner spnSexR;
     String spnSexVal[]={"Hombre", "Mujer"};
     Button btnRegistrar;
@@ -110,11 +113,21 @@ public class RegistroPacientes extends AppCompatActivity {
         edtTel = findViewById(R.id.txtTelR);
         edtFec = findViewById(R.id.txtFechaR);
 
+        txtYaTienesCuenta = findViewById(R.id.txtYaTienesCuenta);
+
         spnSexR=findViewById(R.id.spnSexR);
         ArrayAdapter adapter=new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 spnSexVal);
         spnSexR.setAdapter(adapter);
+
+        txtYaTienesCuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iLog = new Intent(RegistroPacientes.this, IniciarSesion.class);
+                startActivity(iLog);
+            }
+        });
 
         btnRegistrar= findViewById(R.id.btnRegistrar);
 

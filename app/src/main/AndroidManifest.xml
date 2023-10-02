@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,7 +20,7 @@
 
         <!-- Configurar la actividad de inicio de sesión como actividad principal -->
         <activity
-            android:name=".Index.ActMenuAdmin"
+            android:name=".Login.IniciarSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,52 +39,12 @@
             android:name=".Registro.RegistroPagoEdit"
             android:label="Editar Pago">
         </activity>
-        <!-- Desactivar otras actividades quitando las etiquetas <intent-filter> -->
-        <!-- <activity
-            android:name=".Admin.ActListarCitasAdmin"
-            android:exported="true"
-            tools:ignore = "Instantiatable" />
         <activity
-            android:name=".Listas.Citas"
-            android:exported="true"
-            tools:ignore = "Instantiatable" />
+            android:name=".Registro.RegistroPacientes"
+            android:exported="false"/>
         <activity
-            android:name=".Listas.Paciente"
-            android:exported="true"
-            tools:ignore = "Instantiatable" />
-        <activity
-            android:name=".Admin.ActListarPacientesAdmin"
-            android:exported="true"
-            tools:ignore = "Instantiatable" />
-        <activity
-            android:name=".Index.ActPrincipalAdmin"
-            android:exported="true"
-            tools:ignore = "Instantiatable"/>
-        <activity
-            android:name=".Login.ActIniciarSesionAdmin"
-            android:exported="true"
-            tools:ignore = "Instantiatable"/>
-        <activity
-            android:name=".Index.ActPrincipalPaciente"
-            android:exported="true"
-            tools:ignore = "Instantiatable"/>
-        <activity
-            android:name=".Listas.ActListarCitas"
-            android:exported="true"
-            tools:ignore = "Instantiatable"/>
-        <activity
-            android:name=".Login.ActNuevoPaciente"
-            android:exported="true"
-            tools:ignore = "Instantiatable"/>
-        <activity
-            android:name=".RegistrarCitas.ActRegistrarCita"
-            android:exported="true"
-            tools:ignore = "Instantiatable"/>
-        <activity
-            android:name=".Index.ActPrincipal"
-            android:exported="true"
-            android:theme="@style/Theme.COEMA"/>
-        -->
+            android:name=".Perfil.PerfilPaciente"
+            android:exported="false"/> <!-- Configurado como "false" -->
     </application>
 
 </manifest>

@@ -17,9 +17,19 @@
         android:layout_marginBottom="16dp"/>
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:id="@+id/imPerfil"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:id="@+id/btnSeleccionarImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cornerRadius="0dp"
+        android:text="Seleccionar Imagen"
+        android:layout_gravity="center_horizontal"/>
 
 
     <EditText
@@ -44,13 +54,6 @@
         android:inputType="date" />
 
     <EditText
-        android:id="@+id/editTextIdentification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Número de Identificación"
-        android:inputType="text" />
-
-    <EditText
         android:id="@+id/editTextGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,8 +64,15 @@
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Dirección del Domicilio"
+        android:hint="Correo"
         android:inputType="textPostalAddress" />
+
+    <EditText
+        android:id="@+id/editTextIdentification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/editTextPhoneNumber"
@@ -81,6 +91,11 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Guardar Cambios" />
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancelar" />
 
 </LinearLayout>

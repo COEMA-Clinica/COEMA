@@ -6,6 +6,9 @@ public class Paciente implements Serializable {
     private String nombre, apellido, correo, contra, telefono, fecNac, sexo;
     private int id_foto, id;
 
+    public Paciente() {
+    }
+
     public Paciente(String nombre, String apellido, String correo, String contra, String telefono, String fecNac, String sexo, int id_foto, int id) {
         this.nombre = nombre;
         this.apellido = apellido;

@@ -85,6 +85,16 @@ public class DatabaseConnection {
         }
         return conn;
     }
+
+    public static void closeConnection() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 //
 //    public class InsertDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
 //        private Connection connection;

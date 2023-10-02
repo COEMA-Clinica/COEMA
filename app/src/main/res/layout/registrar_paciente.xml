@@ -19,7 +19,8 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"/>
+                android:layout_height="180dp"
+                app:srcCompat="@drawable/coema_nombre" />
 
             <TextView
                 android:id="@+id/textView"
@@ -28,7 +29,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Regístrate"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -39,7 +40,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Nombres:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -50,6 +51,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su nombre"
                 android:inputType="textPersonName"
@@ -65,7 +67,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Apellidos:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -76,6 +78,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su apellido"
                 android:inputType="textPersonName"
@@ -90,8 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Nombre:"
-                android:textColor="#1AEBB2"
+                android:text="Documento de Identidad:"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -102,6 +105,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su dni o carnet de extranjeria"
                 android:inputType="text|number"
@@ -117,7 +121,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Fecha de Nacimiento:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -128,6 +132,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:clickable="true"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -144,7 +149,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Email:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -155,6 +160,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su email"
                 android:inputType="textEmailAddress"
@@ -170,7 +176,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Contraseña:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -181,6 +187,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su contraseña"
                 android:inputType="textPassword"
@@ -196,7 +203,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Telefono:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -207,6 +214,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su telefono"
                 android:inputType="text|number"
@@ -222,7 +230,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
                 android:text="Sexo:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -233,6 +241,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:textColor="@color/black" />
 
             <Button
@@ -245,10 +254,10 @@
                 android:onClick="registrarPaciente"
                 android:text="REGISTRATE"
                 android:textColor="@color/black"
-                app:backgroundTint="#1AEBB2" />
+                app:backgroundTint="#10aac1" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/txtYaTienesCuenta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -258,7 +267,7 @@
                 android:onClick="redIniciarSesion"
                 android:text="¿Ya tienes cuenta? Inicia Sesión"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2" />
+                android:textColor="#10aac1" />
 
         </LinearLayout>
     </ScrollView>

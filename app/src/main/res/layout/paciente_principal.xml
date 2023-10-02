@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <ScrollView
         android:layout_width="413dp"
@@ -31,8 +32,36 @@
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/coemalogo" />
+                app:srcCompat="@drawable/coema_nombre" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:contentDescription="fecha_cita"
+                    app:srcCompat="@drawable/ic_plan_date" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <Button
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="listarCitasPaciente"
+                    android:text="PERFIL"
+                    android:textColor="@color/black"
+                    app:backgroundTint="#10aac1" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +95,52 @@
                     android:onClick="registrarCita"
                     android:text="AGENDAR CITA"
                     android:textColor="@color/black"
-                    app:backgroundTint="#1AEBB2" />
+                    app:backgroundTint="#10aac1" />
+
+                <Button
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="listarCitasPaciente"
+                    android:text="PAGOS Y RECIBOS"
+                    android:textColor="@color/black"
+                    app:backgroundTint="#10aac1" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:contentDescription="fecha_cita"
+                    app:srcCompat="@drawable/ic_plan_date" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:contentDescription="seleccionar_cita"
+                    app:srcCompat="@drawable/ic_change" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="registrarCita"
+                    android:text="DESCANSO MÉDICO O RECETA MÉDICA"
+                    android:textColor="@color/black"
+                    app:backgroundTint="#10aac1" />
 
                 <Button
                     style="@android:style/Widget.Material.Light.Button.Toggle"
@@ -76,9 +150,8 @@
                     android:onClick="listarCitasPaciente"
                     android:text="VER CITAS"
                     android:textColor="@color/black"
-                    app:backgroundTint="#1AEBB2" />
+                    app:backgroundTint="#10aac1" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,9 +182,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="nosotrosPrincipalPaciente"
-                    android:text="SOMOS HEALT AND TECHNOLOGY"
+                    android:text="STAFF PROFESIONAL"
                     android:textColor="@color/black"
-                    app:backgroundTint="#1AEBB2" />
+                    app:backgroundTint="#10aac1" />
 
                 <Button
                     style="@android:style/Widget.Material.Light.Button.Toggle"
@@ -121,8 +194,9 @@
                     android:onClick="salirPrincipalPaciente"
                     android:textColor="@color/black"
                     android:text="CERRAR SESIÓN"
-                    app:backgroundTint="#1AEBB2" />
+                    app:backgroundTint="#10aac1" />
             </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>

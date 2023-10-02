@@ -10,8 +10,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +24,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/coemalogo" />
+                app:srcCompat="@drawable/coema_nombre" />
 
             <TextView
                 android:id="@+id/textView"
@@ -31,7 +33,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Iniciar Sesión"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -42,7 +44,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Email:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -53,12 +55,12 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="#00FF00"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su email"
                 android:inputType="textPersonName"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -69,7 +71,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Contraseña:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -80,12 +82,12 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="#00FF00"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su contraseña"
                 android:inputType="textPassword"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -96,13 +98,13 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="32dp"
-                android:onClick="Registro"
+                android:onClick="iniciarSesion"
                 android:text="INICIAR SESIÓN"
                 android:textColor="@color/black"
-                app:backgroundTint="#1AEBB2" />
+                app:backgroundTint="#10aac1" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/txtRegistrate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -113,7 +115,7 @@
                 android:onClick="redRegistrar"
                 android:text="¿No tienes cuenta? Regístrate"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2" />
+                android:textColor="#10aac1" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -127,7 +129,7 @@
                 android:onClick="redIniciarSesionAdmin"
                 android:text="¿Eres administrador? Inicia sesión aquí"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2" />
+                android:textColor="#10aac1" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,4 +1,5 @@
-/*package com.example.coema.Registro;
+/*
+package com.example.coema.Registro;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.coema.Listas.Paciente;
+import com.example.coema.Modelos.DAOPaciente;
 import com.example.coema.R;
 
 import java.util.ArrayList;
