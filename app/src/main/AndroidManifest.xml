@@ -43,6 +43,12 @@
             android:name=".Registro.RegistroPacientes"
             android:exported="false"/>
         <activity
+            android:name=".Index.ActMenuAdmin"
+            android:exported="false"/>
+        <activity
+            android:name=".Index.MainActivity"
+            android:exported="false"/>
+        <activity
             android:name=".Perfil.PerfilPaciente"
             android:exported="false"/> <!-- Configurado como "false" -->
     </application>

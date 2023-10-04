@@ -135,12 +135,14 @@
                 android:background="@drawable/background_edt"
                 android:clickable="true"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:focusable="false"
+                android:inputType="date"
                 android:onClick="fechaNacimiento"
                 android:paddingStart="20dp"
-                android:textColor="@color/black"
+                android:textColor="#10aac1"
                 android:textColorHint="#5F5F5F"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView3"
