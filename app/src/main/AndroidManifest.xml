@@ -40,10 +40,11 @@
             android:label="Editar Pago">
         </activity>
         <activity
-            android:name=".Registro.RegistroPacientes"
-            android:exported="false"/>
-        <activity
             android:name=".Index.ActMenuAdmin"
+            android:label="Menu Administrador">
+        </activity>
+        <activity
+            android:name=".Registro.RegistroPacientes"
             android:exported="false"/>
         <activity
             android:name=".Index.MainActivity"
