@@ -1,5 +1,7 @@
 package com.example.coema.Adapter;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coema.Modelos.Receipt;
 import com.example.coema.R;
+
 import java.util.List;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHolder> {
 
     private List<Receipt> receipts;
-
     private long selectedReceiptId = -1; // Variable para almacenar el ID del recibo seleccionado
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     public ReceiptAdapter(List<Receipt> receipts) {
         this.receipts = receipts;
@@ -25,10 +28,16 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
     public long getSelectedReceiptId() {
         return selectedReceiptId;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recibo, parent, false);
         return new ViewHolder(view);
+    }
+
+    public void setReceipts(List<Receipt> receipts) {
+        this.receipts = receipts;
+        notifyDataSetChanged(); // Notificar cambios en los datos para que el RecyclerView se actualice
     }
 
     @Override
@@ -44,20 +53,17 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
         holder.selectCheckbox.setChecked(receipt.getId() == selectedReceiptId);
 
         // Escuchar cambios en el estado del CheckBox
-        holder.selectCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Actualizar el ID del recibo seleccionado antes de notificar el cambio
-                    selectedReceiptId = receipt.getId();
+        holder.selectCheckbox.setOnCheckedChangeListener(null); // Desactivar el listener temporalmente
 
-                    // Notificar un cambio en los datos para actualizar la lista
-                    notifyDataSetChanged();
-                }
+        holder.selectCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Actualizar el ID del recibo seleccionado
+                selectedReceiptId = receipt.getId();
+                notifyDataSetChanged();
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -70,7 +76,6 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
         public TextView amountTextView;
         public TextView idTextView;
         public CheckBox selectCheckbox;
-
 
         public ViewHolder(View itemView) {
             super(itemView);

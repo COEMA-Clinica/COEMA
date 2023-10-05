@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Conection.DatabaseConnection;
 import com.example.coema.Index.MenuRecibosActivity;
+import com.example.coema.Modelos.Receipt;
 import com.example.coema.R;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RegistroPagoEdit extends AppCompatActivity {
@@ -31,14 +33,6 @@ public class RegistroPagoEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_pago_edit);
 
-        // Obtener los datos ingresados por el usuario desde la actividad anterior
-        Intent intent = getIntent();
-        String paciente = intent.getStringExtra("paciente");
-        String fecha = intent.getStringExtra("fecha");
-        String monto = intent.getStringExtra("monto");
-        String motivoCobro = intent.getStringExtra("motivoCobro");
-        long selectedReceiptId = intent.getLongExtra("selectedReceiptId", -1);
-
         // Enlazar vistas
         patientEditText = findViewById(R.id.patientEditText);
         dateEditText = findViewById(R.id.dateEditText);
@@ -46,11 +40,18 @@ public class RegistroPagoEdit extends AppCompatActivity {
         reasonEditText = findViewById(R.id.reasonEditText);
         updatePaymentButton = findViewById(R.id.addPaymentButton);
 
-        // Establecer los valores de los EditText con los datos recibidos
-        patientEditText.setText(paciente);
-        dateEditText.setText(fecha);
-        amountEditText.setText(monto);
-        reasonEditText.setText(motivoCobro);
+        // Obtener los datos ingresados por el usuario desde la actividad anterior
+        Intent intent = getIntent();
+        long selectedReceiptId = intent.getLongExtra("selectedReceiptId", -1);
+
+        // Verificar si se proporcionó un ID de recibo válido
+        if (selectedReceiptId != -1) {
+            // Iniciar una tarea asincrónica para obtener los detalles del recibo de la base de datos
+            new ObtenerDetallesReciboAsyncTask(selectedReceiptId).execute();
+        } else {
+            Toast.makeText(this, "ID de recibo no válido", Toast.LENGTH_SHORT).show();
+            finish(); // Cierra la actividad si no se proporcionó un ID de recibo válido
+        }
 
         // Configurar el botón para actualizar el pago
         updatePaymentButton.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +67,80 @@ public class RegistroPagoEdit extends AppCompatActivity {
                 new ActualizarReciboAsyncTask(selectedReceiptId, newPaciente, newFecha, newMonto, newMotivoCobro).execute();
             }
         });
+    }
+
+    // Tarea asincrónica para obtener los detalles del recibo desde la base de datos
+    private class ObtenerDetallesReciboAsyncTask extends AsyncTask<Void, Void, Receipt> {
+        private long selectedReceiptId;
+
+        public ObtenerDetallesReciboAsyncTask(long selectedReceiptId) {
+            this.selectedReceiptId = selectedReceiptId;
+        }
+
+        @Override
+        protected Receipt doInBackground(Void... voids) {
+            Connection conn = null;
+            PreparedStatement statement = null;
+            ResultSet resultSet = null;
+
+            try {
+                conn = DatabaseConnection.getConnection();
+
+                if (conn != null) {
+                    // Query para obtener los detalles del recibo por ID (sin incluir motivocobro)
+                    String query = "SELECT name, date, amount FROM receipt WHERE id = ?";
+                    statement = conn.prepareStatement(query);
+                    statement.setLong(1, selectedReceiptId);
+                    resultSet = statement.executeQuery();
+
+                    // Verificar si se encontró el recibo
+                    if (resultSet.next()) {
+                        String name = resultSet.getString("name");
+                        String date = resultSet.getString("date");
+                        double amount = resultSet.getDouble("amount");
+
+                        return new Receipt(selectedReceiptId, name, date, amount);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                // Cerrar la conexión, el statement y el resultSet
+                if (resultSet != null) {
+                    try {
+                        resultSet.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                // No cerrar la conexión aquí para que no se cierre accidentalmente
+            }
+
+            return null; // Devolver null si no se encontró el recibo
+        }
+
+        @Override
+        protected void onPostExecute(Receipt receipt) {
+            super.onPostExecute(receipt);
+
+            if (receipt != null) {
+                // Llenar los campos de texto con los detalles del recibo
+                patientEditText.setText(receipt.getName());
+                dateEditText.setText(receipt.getDate());
+                amountEditText.setText(String.valueOf(receipt.getAmount()));
+
+            } else {
+                Toast.makeText(RegistroPagoEdit.this, "Recibo no encontrado", Toast.LENGTH_SHORT).show();
+                finish(); // Cierra la actividad si el recibo no se encontró
+            }
+        }
     }
 
     // Tarea asincrónica para actualizar el recibo en la base de datos
@@ -93,7 +168,7 @@ public class RegistroPagoEdit extends AppCompatActivity {
                 conn = DatabaseConnection.getConnection();
 
                 if (conn != null) {
-                    // Query para actualizar el recibo
+                    // Query para actualizar el recibo (sin incluir motivocobro)
                     String query = "UPDATE receipt SET name = ?, date = ?, amount = ? WHERE id = ?";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, newPaciente);
@@ -118,13 +193,7 @@ public class RegistroPagoEdit extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
+                // No cerrar la conexión aquí para que no se cierre accidentalmente
             }
 
             return false;
