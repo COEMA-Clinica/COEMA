@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +30,7 @@ public class MenuRecibosActivity extends AppCompatActivity {
     private Button addPaymentButton;
     private RecyclerView recyclerView;
     private ReceiptAdapter adapter;
+    private List<Receipt> receipts = new ArrayList<>(); // Lista para almacenar los recibos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class MenuRecibosActivity extends AppCompatActivity {
         // Configura el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ReceiptAdapter(new ArrayList<>());
+        adapter = new ReceiptAdapter(receipts); // Pasa la lista de recibos al adaptador
         recyclerView.setAdapter(adapter);
 
         // Configura los listeners de los botones
@@ -56,7 +55,7 @@ public class MenuRecibosActivity extends AppCompatActivity {
                 long selectedReceiptId = adapter.getSelectedReceiptId();
 
                 if (selectedReceiptId != -1) {
-                    // Abre la actividad de edición y pasa el ID seleccionado
+                    // Abre la actividad de edición y pasa los datos seleccionados
                     Intent intent = new Intent(MenuRecibosActivity.this, RegistroPagoEdit.class);
                     intent.putExtra("selectedReceiptId", selectedReceiptId);
                     startActivity(intent);
@@ -66,7 +65,6 @@ public class MenuRecibosActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         addPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,33 +118,9 @@ public class MenuRecibosActivity extends AppCompatActivity {
         protected void onPostExecute(List<Receipt> receiptList) {
             super.onPostExecute(receiptList);
 
-            // Obtén una referencia al LinearLayout que contendrá las vistas de los recibos
-            LinearLayout receiptsLinearLayout = findViewById(R.id.receiptsLinearLayout);
-
-            // Limpia cualquier vista previamente agregada al LinearLayout
-            receiptsLinearLayout.removeAllViews();
-
-            // Verifica si receiptList no está vacío antes de mostrar los datos
-            if (receiptList != null && !receiptList.isEmpty()) {
-                // Itera a través de la lista de recibos y muestra cada uno
-                for (Receipt receipt : receiptList) {
-                    // Crea una nueva vista para mostrar el recibo
-                    View receiptView = getLayoutInflater().inflate(R.layout.item_recibo, null);
-
-                    // Obtén referencias a los TextViews en la vista del recibo
-                    TextView nameTextView = receiptView.findViewById(R.id.nameTextView);
-                    TextView dateTextView = receiptView.findViewById(R.id.dateTextView);
-                    TextView amountTextView = receiptView.findViewById(R.id.amountTextView);
-
-                    // Configura los TextViews con los datos del recibo actual
-                    nameTextView.setText(receipt.getName());
-                    dateTextView.setText(receipt.getDate());
-                    amountTextView.setText(String.valueOf(receipt.getAmount()));
-
-                    // Agrega la vista del recibo al LinearLayout
-                    receiptsLinearLayout.addView(receiptView);
-                }
-            }
+            // Actualiza el adaptador con la lista de recibos obtenida de la base de datos
+            receipts.addAll(receiptList);
+            adapter.notifyDataSetChanged();
         }
     }
 }

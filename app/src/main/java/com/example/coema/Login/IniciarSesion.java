@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Index.ActMenuAdmin;
 import com.example.coema.Perfil.PerfilPaciente;
 import com.example.coema.R;
 import com.example.coema.Registro.RegistroPacientes;
@@ -25,11 +26,12 @@ public class IniciarSesion extends AppCompatActivity {
 
     EditText txtCorreo, txtContra;
 
-    TextView txtRegistrate;
+    TextView txtRegistrate, txtEresAdmin; // Agrega la referencia al TextView "¿Eres administrador?"
 
     Button btnIniSe;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio_sesion);
         asignarReferencias();
@@ -37,12 +39,14 @@ public class IniciarSesion extends AppCompatActivity {
         //new DatabaseConnectionTask().execute();
     }
 
-
-    private void asignarReferencias(){
+    private void asignarReferencias() {
         txtCorreo = findViewById(R.id.txtEmailR);
         txtContra = findViewById(R.id.txtContraR);
         btnIniSe = (Button) findViewById(R.id.btnIniciarSesion);
         txtRegistrate = findViewById(R.id.txtRegistrate);
+
+        // Agrega la referencia al TextView "¿Eres administrador?"
+        txtEresAdmin = findViewById(R.id.textView7);
 
         txtRegistrate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,11 +55,22 @@ public class IniciarSesion extends AppCompatActivity {
                 startActivity(iReg);
             }
         });
+
+        // Configura el clic en el TextView "¿Eres administrador?"
+        txtEresAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iAdmin = new Intent(IniciarSesion.this, ActMenuAdmin.class);
+                startActivity(iAdmin);
+            }
+        });
+
         btnIniSe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ObtenerDatosDeTablaAsyncTask task = new ObtenerDatosDeTablaAsyncTask(txtCorreo.getText().toString(), txtContra.getText().toString());
-                task.execute();            }
+                task.execute();
+            }
         });
     }
 
