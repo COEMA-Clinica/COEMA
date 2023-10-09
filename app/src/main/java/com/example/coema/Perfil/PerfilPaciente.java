@@ -4,52 +4,49 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
-import android.content.pm.PackageManager;
+
 import com.example.coema.Conection.DatabaseConnection;
 import com.example.coema.Listas.Paciente;
-import com.example.coema.Login.IniciarSesion;
 import com.example.coema.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
 public class PerfilPaciente extends AppCompatActivity {
 
-    EditText editTextFirstName, editTextLastName,  editTextBirthdate,
+    EditText editTextFirstName, editTextLastName,  editTextBirthdate, editTextHistorial,
             editTextIdentification, editTextGender, editTextAddress, editTextPhoneNumber;
     Button btnSave, btnSelect;
 
     private ImageView imageView;
 
+    private Bitmap selectedImageBitmap;
+
     private static final int REQUEST_CAMERA = 1;
     private static final int REQUEST_GALLERY = 2;
-
-    ListView lstOpciones;
 
 
     @Override
@@ -73,6 +70,7 @@ public class PerfilPaciente extends AppCompatActivity {
         editTextIdentification = findViewById(R.id.editTextIdentification);
         editTextGender = findViewById(R.id.editTextGender);
         editTextAddress = findViewById(R.id.editTextAddress);
+        editTextHistorial = findViewById(R.id.editTextDocumento);
         editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
         imageView = (ImageView) findViewById(R.id.imPerfil);
         btnSave = findViewById(R.id.btnSave);
@@ -87,7 +85,8 @@ public class PerfilPaciente extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                PerfilPaciente.GuardarCambiosAsyncTask task = new PerfilPaciente.GuardarCambiosAsyncTask(recuperarData());
+                task.execute();
             }
         });
         PerfilPaciente.ObtenerDatosDeTablaAsyncTask task = new PerfilPaciente.ObtenerDatosDeTablaAsyncTask(recuperarData());
@@ -104,53 +103,144 @@ public class PerfilPaciente extends AppCompatActivity {
         return null;
     }
 
-    private class ObtenerDatosDeTablaAsyncTask extends AsyncTask<Void, Void, Paciente> {
-        private Paciente paciente = new Paciente();
+    private class ObtenerDatosDeTablaAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        private Integer idPaciente;
+        private final Integer idPaciente;
 
         public ObtenerDatosDeTablaAsyncTask(Integer idPaciente) {
             this.idPaciente=idPaciente;
         }
 
         @Override
-        protected Paciente doInBackground(Void... voids) {
-            try (Connection connection = DatabaseConnection.getConnection()) {
+        protected Void doInBackground(Void... voids) {
+            Connection connection;
+            try {
+                connection = DatabaseConnection.getConnection();
                 Statement st = connection.createStatement();
                 ResultSet rs = st.executeQuery("SELECT * FROM pacientes WHERE id_paciente='" + idPaciente+"'" );
                 if (rs.next()) {
                     // El usuario se ha autenticado correctamente
                     String nom=rs.getString("nombres");
-                    paciente.setNombre(nom);
                     String ape=rs.getString("apellidos");
-                    paciente.setApellido(ape);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String fecNac=sdf.format(rs.getDate("fecha_nacimiento"));
-                    paciente.setFecNac(fecNac);
                     String cor=rs.getString("correo");
-                    paciente.setCorreo(cor);
                     String con=rs.getString("contrasena");
-                    paciente.setContra(con);
                     String gen=rs.getString("sexo");
-                    paciente.setSexo(gen);
                     String tel=rs.getString("telefono");
-                    paciente.setTelefono(tel);
 
-                    editTextFirstName.setText(paciente.getNombre());
-                    editTextLastName.setText(paciente.getApellido());
-                    editTextIdentification.setText(paciente.getContra());
-                    editTextBirthdate.setText(paciente.getFecNac());
-                    editTextGender.setText(paciente.getSexo());
-                    editTextPhoneNumber.setText(paciente.getTelefono());
-                    editTextAddress.setText(paciente.getCorreo());
+                    byte[] imageData = rs.getBytes("foto");
+
+
+                    String his=rs.getString("historial_medico");
+
+
+
+                    if (his!=null){
+                        editTextHistorial.setText(his);
+                    }
+                    editTextFirstName.setText(nom);
+                    editTextLastName.setText(ape);
+                    editTextIdentification.setText(con);
+                    editTextBirthdate.setText(fecNac);
+                    editTextGender.setText(gen);
+                    editTextPhoneNumber.setText(tel);
+                    editTextAddress.setText(cor);
+                    if(imageData!=null){
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+                        imageView.setImageBitmap(bitmap);
+                    }
                 }
-                return paciente;
             }catch(Exception e){
                 e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+        public class GuardarCambiosAsyncTask extends AsyncTask<Void, Void, String> {
+            private final Integer idPaciente;
+
+            public GuardarCambiosAsyncTask(Integer idPaciente) {
+                this.idPaciente=idPaciente;
+            }
+            @Override
+            protected String doInBackground(Void... voids) {
+                Connection connection;
+                try {
+                    connection = DatabaseConnection.getConnection();
+                    if (connection != null) {
+                        String nombre=editTextFirstName.getText().toString();
+                        String apellido=editTextLastName.getText().toString();
+                        String correo=editTextAddress.getText().toString();
+                        String contra=editTextIdentification.getText().toString();
+                        String fecNac=editTextBirthdate.getText().toString();
+                        String sexo=editTextGender.getText().toString();
+                        String telefono=editTextPhoneNumber.getText().toString();
+                        String historial=editTextHistorial.getText().toString();
+
+                        // Convierte el Bitmap en un formato que necesites (por ejemplo, bytes)
+                        String updateQuery = "UPDATE pacientes SET nombres = ?, apellidos = ?, correo = ?, " +
+                                "contrasena = ?, telefono = ?, fecha_nacimiento = to_date(?,'yyyy-MM-dd'), sexo = ? WHERE id_paciente = ?";
+                        PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+                        preparedStatement.setString(1, nombre);
+                        preparedStatement.setString(2, apellido);
+                        preparedStatement.setString(3, correo);
+                        preparedStatement.setString(4, contra);
+                        preparedStatement.setString(5, telefono);
+                        preparedStatement.setString(6, fecNac);
+                        preparedStatement.setString(7, sexo);
+                        preparedStatement.setString(8, idPaciente.toString());
+
+                        preparedStatement.executeUpdate();
+                        preparedStatement.close();
+
+                        if (historial.equals("")){
+                            String updateQuery2 = "UPDATE pacientes SET historial_medico = ? WHERE id_paciente = ?";
+                            PreparedStatement preparedStatement2 = connection.prepareStatement(updateQuery2);
+                            preparedStatement2.setString(1, historial);
+                            preparedStatement2.setString(2, idPaciente.toString());
+
+                            preparedStatement2.executeUpdate();
+                            preparedStatement2.close();
+                        }
+                        if (selectedImageBitmap != null){
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            selectedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] byteArray = stream.toByteArray();
+                            String updateQuery3 = "UPDATE pacientes SET foto = ? WHERE id_paciente = ?";
+                            PreparedStatement preparedStatement3 = connection.prepareStatement(updateQuery3);
+                            preparedStatement3.setBytes(1, byteArray);
+                            preparedStatement3.setString(2, idPaciente.toString());
+
+                            preparedStatement3.executeUpdate();
+                            preparedStatement3.close();
+                        }
+                    }else {
+                        // Manejo de error si la conexión es nula
+                        return "Error: No se pudo establecer una conexión a la base de datos.";
+                    }
+
+
+                }catch(Exception e){
+                    e.printStackTrace();
+
+                }
                 return null;
             }
-        }
+            @Override
+            protected void onPostExecute(String errorMessage) {
+                super.onPostExecute(errorMessage);
 
+                if (errorMessage != null) {
+                    // Mostrar un mensaje de error
+                    Toast.makeText(PerfilPaciente.this, errorMessage, Toast.LENGTH_SHORT).show();
+                } else {
+                    // Los cambios se guardaron correctamente
+                    Toast.makeText(PerfilPaciente.this, "Cambios guardados correctamente", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
         /*@Override
         protected void onPostExecute(Integer idPaciente) {
             super.onPostExecute(idPaciente);
@@ -166,9 +256,6 @@ public class PerfilPaciente extends AppCompatActivity {
 
             }
         }*/
-
-
-    }
 
     /*private Paciente buscarDato() {
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -234,11 +321,12 @@ public class PerfilPaciente extends AppCompatActivity {
 
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+        //if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            // Utiliza ActivityOptionsCompat para configurar las opciones de transición si es necesario
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
-        } else {
+        /*} else {
             Toast.makeText(this, "La cámara no está disponible", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     private void openGallery() {
@@ -258,23 +346,24 @@ public class PerfilPaciente extends AppCompatActivity {
         }
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
-                // La imagen de la cámara se capturó exitosamente
-                // Puedes manejar la imagen aquí
-                // Por ejemplo, puedes obtener la imagen de data y mostrarla en un ImageView
-                // Bundle extras = data.getExtras();
-                // Bitmap imageBitmap = (Bitmap) extras.get("data");
+                Bundle extras = data.getExtras();
+                selectedImageBitmap = (Bitmap) extras.get("data");
+                imageView.setImageBitmap(selectedImageBitmap);
             } else if (requestCode == REQUEST_GALLERY) {
-                // La imagen de la galería se seleccionó exitosamente
-                // La URI de la imagen seleccionada se encuentra en data.getData()
                 Uri selectedImageUri = data.getData();
-                // Puedes manejar la URI aquí
+                try {
+                    selectedImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                    imageView.setImageBitmap(selectedImageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
+
 
 }

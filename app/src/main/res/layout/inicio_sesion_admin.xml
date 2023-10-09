@@ -2,11 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#1F2F52">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +23,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/coemalogo" />
+                app:srcCompat="@drawable/coema_nombre" />
 
             <TextView
                 android:id="@+id/textView"
@@ -30,7 +32,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Iniciar Sesión Administrador"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -41,7 +43,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Email:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -52,11 +54,12 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su email"
                 android:inputType="textPersonName"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -67,7 +70,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Contraseña:"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -78,11 +81,12 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/background_edt"
                 android:ems="10"
                 android:hint="Ingrese su contraseña"
                 android:inputType="textPassword"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textColorHint="#5F5F5F"
                 android:textSize="17sp" />
 
@@ -96,10 +100,10 @@
                 android:onClick="iniciarSesionAdmin"
                 android:text="INICIAR SESIÓN"
                 android:textColor="@color/black"
-                app:backgroundTint="#1AEBB2" />
+                app:backgroundTint="#10aac1" />
 
             <TextView
-                android:id="@+id/txtYaTienesCuenta"
+                android:id="@+id/txtRegistrate1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -110,7 +114,7 @@
                 android:onClick="redRegistrar"
                 android:text="¿No tienes cuenta? Regístrate"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2" />
+                android:textColor="#10aac1" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -124,7 +128,7 @@
                 android:onClick="redIniciarSesion"
                 android:text="¿No eres administrador? Inicia Sesión aquí"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2" />
+                android:textColor="#10aac1" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

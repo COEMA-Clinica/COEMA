@@ -20,7 +20,7 @@
 
         <!-- Configurar la actividad de inicio de sesión como actividad principal -->
         <activity
-            android:name=".Login.IniciarSesion"
+            android:name=".Index.Principal"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,10 @@
         </activity>
         <activity
             android:name=".Index.MenuRecibosActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Login.IniciarSesion"
             android:exported="true">
         </activity>
         <activity
@@ -47,11 +51,12 @@
             android:name=".Registro.RegistroPacientes"
             android:exported="false"/>
         <activity
-            android:name=".Index.MainActivity"
+            android:name=".Login.IniciarSesionAdmin"
             android:exported="false"/>
         <activity
             android:name=".Perfil.PerfilPaciente"
             android:exported="false"/> <!-- Configurado como "false" -->
     </application>
+
 
 </manifest>

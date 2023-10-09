@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -33,7 +34,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/coemalogo" />
+                app:srcCompat="@drawable/coema_nombre" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -43,7 +44,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Bienvenido a COEMA"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -57,10 +58,10 @@
                 android:onClick="iniciarSesion"
                 android:text="INICIAR SESIÓN"
                 android:textColor="@color/black"
-                app:backgroundTint="#1AEBB2" />
+                app:backgroundTint="#10aac1" />
 
             <TextView
-                android:id="@+id/txtYaTienesCuenta"
+                android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -70,7 +71,7 @@
                 android:onClick="redRegistrar"
                 android:text="¿No tienes cuenta? Regístrate"
                 android:textAlignment="center"
-                android:textColor="#1AEBB2"
+                android:textColor="#10aac1"
                 tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
             <ImageView
@@ -82,7 +83,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="match_parent"
                 android:layout_height="85dp"
-                app:srcCompat="@drawable/coemalogo" />
+                app:srcCompat="@drawable/coema_nombre" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
