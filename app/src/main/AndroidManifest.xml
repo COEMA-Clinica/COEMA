@@ -44,6 +44,18 @@
             android:label="Editar Pago">
         </activity>
         <activity
+            android:name=".Registro.RegistroTratamientos"
+            android:label="Editar Pago">
+        </activity>
+        <activity
+            android:name=".Registro.RegistroTratamientosEdit"
+            android:label="Editar Pago">
+        </activity>
+        <activity
+            android:name=".Index.ListarTratamientos"
+            android:label="Editar Pago">
+        </activity>
+        <activity
             android:name=".Index.ActMenuAdmin"
             android:label="Menu Administrador">
         </activity>
@@ -52,6 +64,12 @@
             android:exported="false"/>
         <activity
             android:name=".Login.IniciarSesionAdmin"
+            android:exported="false"/>
+        <activity
+            android:name=".Perfil.PacientePrincipal"
+            android:exported="false"/>
+        <activity
+            android:name=".Registro.RegistroCitas"
             android:exported="false"/>
         <activity
             android:name=".Perfil.PerfilPaciente"
