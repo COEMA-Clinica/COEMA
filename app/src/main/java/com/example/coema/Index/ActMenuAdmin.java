@@ -14,7 +14,7 @@ public class ActMenuAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_administrador);
+        setContentView(R.layout.admin_principal);
     }
 
     // Método que se llama cuando se hace clic en la imagen de "Recibo de Pagos"

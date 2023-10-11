@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Index.ActMenuAdmin;
+import com.example.coema.Index.ListarTratamientos;
 import com.example.coema.Index.MenuRecibosActivity;
 import com.example.coema.Listas.Tratamientos;
 import com.example.coema.R;
@@ -40,14 +42,14 @@ public class RegistroTratamientosEdit extends AppCompatActivity {
 
         // Obtener los datos ingresados por el usuario desde la actividad anterior
         Intent intent = getIntent();
-        int selectedTratamientoId = intent.getIntExtra("selectedTratamientoId", -1);
+        int selectedTratamientoId = intent.getIntExtra("selectedTratamientosId", -1);
 
         // Verificar si se proporcionó un ID de recibo válido
         if (selectedTratamientoId != -1) {
             // Iniciar una tarea asincrónica para obtener los detalles del recibo de la base de datos
             new ObtenerDetallesTratamientoAsyncTask( selectedTratamientoId).execute();
         } else {
-            Toast.makeText(this, "ID de tratamiento no válido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ID de tratamiento no válido" + selectedTratamientoId, Toast.LENGTH_SHORT).show();
             finish(); // Cierra la actividad si no se proporcionó un ID de recibo válido
         }
 
@@ -145,13 +147,13 @@ public class RegistroTratamientosEdit extends AppCompatActivity {
         private int selectedTratamientoId;
         private String newPaciente;
 
-        private String newMonto;
+        private String newDetalle;
         private String newMotivoCobro;
 
-        public ActualizarTratamientoAsyncTask(int selectedTratamientoId, String newPaciente, String newMonto, String newMotivoCobro) {
+        public ActualizarTratamientoAsyncTask(int selectedTratamientoId, String newPaciente, String newDetalle, String newMotivoCobro) {
             this.selectedTratamientoId = selectedTratamientoId;
             this.newPaciente = newPaciente;
-            this.newMonto = newMonto;
+            this.newDetalle = newDetalle;
             this.newMotivoCobro = newMotivoCobro;
         }
 
@@ -165,10 +167,11 @@ public class RegistroTratamientosEdit extends AppCompatActivity {
 
                 if (conn != null) {
                     // Query para actualizar el recibo (sin incluir motivocobro)
-                    String query = "UPDATE tratamientos SET nombre = ?, detalle = ?, precio = ? WHERE id = ?";
+                    String query = "UPDATE tratamientos SET nombre = ?, detalle = ?, precio = CAST(? AS numeric) WHERE id_tratamiento = ?";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, newPaciente);
-                    statement.setDouble(3, Double.parseDouble(newMonto));
+                    statement.setString(2, newMotivoCobro);
+                    statement.setString(3, newDetalle);
                     statement.setInt(4, selectedTratamientoId);
 
                     // Ejecutar la actualización
@@ -203,7 +206,7 @@ public class RegistroTratamientosEdit extends AppCompatActivity {
                 Toast.makeText(RegistroTratamientosEdit.this, "Actualización realizada", Toast.LENGTH_LONG).show();
 
                 // Redirigir de vuelta a MenuRecibosActivity
-                Intent intent = new Intent(RegistroTratamientosEdit.this, MenuRecibosActivity.class);
+                Intent intent = new Intent(RegistroTratamientosEdit.this, ListarTratamientos.class);
                 startActivity(intent);
                 finish(); // Cierra la actividad actual para evitar que el usuario vuelva atrás
             } else {

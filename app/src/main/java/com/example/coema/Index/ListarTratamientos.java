@@ -56,7 +56,7 @@ public class ListarTratamientos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Obtén el ID del recibo seleccionado directamente desde el adaptador
-                long selectedTratamientosId = adapter.getSelectedTratamientosId();
+                int selectedTratamientosId = adapter.getSelectedTratamientosId();
 
                 if (selectedTratamientosId != -1) {
                     // Abre la actividad de edición y pasa los datos seleccionados

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coema.Listas.Tratamientos;
-import com.example.coema.Modelos.Receipt;
 import com.example.coema.R;
 
 import java.util.List;
@@ -19,14 +18,14 @@ import java.util.List;
 public class TratamientosAdapter extends RecyclerView.Adapter<TratamientosAdapter.ViewHolder> {
 
     private List<Tratamientos> tratamientos;
-    private long selectedTratamientosId = -1; // Variable para almacenar el ID del recibo seleccionado
+    private int selectedTratamientosId = -1; // Variable para almacenar el ID del recibo seleccionado
     private Handler handler = new Handler(Looper.getMainLooper());
 
     public TratamientosAdapter(List<Tratamientos> tratamientos) {
         this.tratamientos = tratamientos;
     }
 
-    public long getSelectedTratamientosId() {
+    public int getSelectedTratamientosId() {
         return selectedTratamientosId;
     }
 
@@ -47,6 +46,7 @@ public class TratamientosAdapter extends RecyclerView.Adapter<TratamientosAdapte
 
         holder.idTextView.setText(String.valueOf(tratamiento.getId()));
         holder.nameTextView.setText(tratamiento.getNom());
+        holder.detalleTextView.setText(tratamiento.getDet());
         holder.amountTextView.setText(String.valueOf(tratamiento.getPrec()));
 
         // Configurar el estado del CheckBox
@@ -72,7 +72,7 @@ public class TratamientosAdapter extends RecyclerView.Adapter<TratamientosAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
-        public TextView dateTextView;
+        public TextView detalleTextView;
         public TextView amountTextView;
         public TextView idTextView;
         public CheckBox selectCheckbox;
@@ -80,7 +80,7 @@ public class TratamientosAdapter extends RecyclerView.Adapter<TratamientosAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
+            detalleTextView = itemView.findViewById(R.id.detalleTextView);
             amountTextView = itemView.findViewById(R.id.amountTextView);
             selectCheckbox = itemView.findViewById(R.id.selectCheckbox);
             idTextView = itemView.findViewById(R.id.idTextView);
