@@ -21,8 +21,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
