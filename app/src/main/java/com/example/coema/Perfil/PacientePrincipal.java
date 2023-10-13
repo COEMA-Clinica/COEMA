@@ -20,7 +20,7 @@ public class PacientePrincipal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registrar_cita);
+        setContentView(R.layout.paciente_principal);
 //        obtenerDatos();
 
 
@@ -31,10 +31,9 @@ public class PacientePrincipal extends AppCompatActivity {
 
     public void registrarCita(View view) {
         Intent intent = new Intent(this, RegistroCitas.class);
-        Bundle bundle = new Bundle();
-        intent.putExtras(bundle);
         startActivity(intent);
     }
+
 
 
     public void perfilPaciente(View view) {

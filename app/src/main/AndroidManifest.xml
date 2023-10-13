@@ -36,6 +36,10 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".Registro.RegistroCitas"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".Registro.RegitroPago"
             android:label="Registro de Pago">
         </activity>
@@ -71,9 +75,6 @@
             android:exported="false"/>
         <activity
             android:name=".Perfil.PacientePrincipal"
-            android:exported="false"/>
-        <activity
-            android:name=".Registro.RegistroCitas"
             android:exported="false"/>
         <activity
             android:name=".Perfil.PerfilPaciente"

@@ -3,6 +3,7 @@ package com.example.coema.Login;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +13,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Conection.GlobalVariables;
 import com.example.coema.Index.ActMenuAdmin;
+import com.example.coema.Index.ActMenuOdonto;
+import com.example.coema.Perfil.PacientePrincipal;
 import com.example.coema.Perfil.PerfilPaciente;
 import com.example.coema.R;
 import com.example.coema.Registro.RegistroPacientes;
@@ -27,7 +31,7 @@ public class IniciarSesion extends AppCompatActivity {
 
     EditText txtCorreo, txtContra;
 
-    TextView txtRegistrate, txtEresAdmin; // Agrega la referencia al TextView "¿Eres administrador?"
+    TextView txtRegistrate; // Agrega la referencia al TextView "¿Eres administrador?"
 
     Button btnIniSe;
 
@@ -46,8 +50,7 @@ public class IniciarSesion extends AppCompatActivity {
         btnIniSe = (Button) findViewById(R.id.btnIniciarSesion);
         txtRegistrate = findViewById(R.id.txtRegistrate);
 
-        // Agrega la referencia al TextView "¿Eres administrador?"
-        txtEresAdmin = findViewById(R.id.textView7);
+
 
         txtRegistrate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +61,7 @@ public class IniciarSesion extends AppCompatActivity {
         });
 
         // Configura el clic en el TextView "¿Eres administrador?"
-        txtEresAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent iAdmin = new Intent(IniciarSesion.this, ActMenuAdmin.class);
-                startActivity(iAdmin);
-            }
-        });
+
 
         btnIniSe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,16 +85,22 @@ public class IniciarSesion extends AppCompatActivity {
             Connection connection = null;
             try {
                 // Obtener una conexión a la base de datos
-                connection=DatabaseConnection.getConnection();
+                connection = DatabaseConnection.getConnection();
 
                 if (connection != null) {
-                    // Realizar las operaciones de consulta y cierre de la conexión aquí
-                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_paciente FROM pacientes where correo='" + correo + "' and " +
-                            "contrasena='" + contra + "'");
+                    // Realizar las operaciones de consulta aquí
+                    String query = "SELECT id_usuario, id_rol FROM usuarios WHERE nombre_usuario = ? AND contrasena = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setString(1, correo);
+                    preparedStatement.setString(2, contra);
+
                     ResultSet rs = preparedStatement.executeQuery();
                     if (rs.next()) {
-                        // El usuario se ha autenticado correctamente
-                        return rs.getInt("id_paciente");
+                        int idUsuario = rs.getInt("id_usuario");
+                        GlobalVariables.getInstance().setUserId(idUsuario);
+                        int idRol = rs.getInt("id_rol");
+                        Log.d("IniciarSesion", "idUsuario almacenado: " + idUsuario);
+                        return idRol; // Devuelve el ID del rol del usuario
                     }
                     rs.close();
                 }
@@ -108,22 +111,34 @@ public class IniciarSesion extends AppCompatActivity {
             return null;
         }
 
-
         @Override
-        protected void onPostExecute(Integer idPaciente) {
-            super.onPostExecute(idPaciente);
-                if (idPaciente != null) {
-                    // El usuario se ha autenticado correctamente
-                    Intent iRegistrar = new Intent(IniciarSesion.this, PerfilPaciente.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("data", idPaciente);
-                    iRegistrar.putExtras(bundle);
-                    startActivity(iRegistrar);
+        protected void onPostExecute(Integer idRol) {
+            super.onPostExecute(idRol);
+            if (idRol != null) {
+                Intent intent = null;
+                if (idRol == 1) {
+                    // Administrador
+                    intent = new Intent(IniciarSesion.this, ActMenuAdmin.class);
+                } else if (idRol == 2) {
+                    // Doctor
+                    intent = new Intent(IniciarSesion.this, ActMenuOdonto.class);
+                } else if (idRol == 3) {
+                    // Paciente
+                    intent = new Intent(IniciarSesion.this, PacientePrincipal.class);
+                }
+
+                if (intent != null) {
+                    startActivity(intent);
                     Toast.makeText(getApplicationContext(), "SE HA LOGEADO CORRECTAMENTE", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Usuario no encontrado, mostrar el Toast aquí
-                    Toast.makeText(getApplicationContext(), "USUARIO NO ENCONTRADO", Toast.LENGTH_SHORT).show();
+                    // Rol no válido, mostrar el Toast aquí
+                    Toast.makeText(getApplicationContext(), "ROL NO VÁLIDO", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                // Usuario no encontrado, mostrar el Toast aquí
+                Toast.makeText(getApplicationContext(), "USUARIO NO ENCONTRADO", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
 }

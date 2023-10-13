@@ -27,131 +27,7 @@
                 app:srcCompat="@drawable/coema_nombre" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Nombre:"
-                android:textColor="#10aac1"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <EditText
-                android:id="@+id/edtNomCita"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
-                android:ems="10"
-                android:hint="Ingrese su nombre"
-                android:inputType="textPersonName"
-                android:paddingStart="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="#5F5F5F"
-                android:textSize="17sp" />
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Apellido Paterno:"
-                android:textColor="#10aac1"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <EditText
-                android:id="@+id/edtApePatCita"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
-                android:ems="10"
-                android:hint="Ingrese su apellido paterno"
-                android:inputType="textPersonName"
-                android:paddingStart="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="#5F5F5F"
-                android:textSize="17sp" />
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Apellido Materno:"
-                android:textColor="#10aac1"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <EditText
-                android:id="@+id/edtApeMatCita"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
-                android:ems="10"
-                android:hint="Ingrese su apellido materno"
-                android:inputType="textPersonName"
-                android:paddingStart="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="#5F5F5F"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Correo:"
-                android:textColor="#10aac1"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-            <EditText
-                android:id="@+id/edtCorrCita"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
-                android:ems="10"
-                android:hint="Ingrese su correo"
-                android:inputType="textPersonName"
-                android:paddingStart="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="#5F5F5F"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Sexo:"
-                android:textColor="#10aac1"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/sprSexoCita"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_edt"
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -178,7 +54,7 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -200,7 +76,7 @@
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
