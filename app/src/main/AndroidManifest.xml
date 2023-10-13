@@ -48,6 +48,10 @@
             android:label="Editar Pago">
         </activity>
         <activity
+            android:name=".Registro.RegitrarPagoPaciente"
+            android:label="Editar Pago">
+        </activity>
+        <activity
             android:name=".Registro.RegistroTratamientos"
             android:label="Editar Pago">
         </activity>

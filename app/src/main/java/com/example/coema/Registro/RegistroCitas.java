@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Conection.GlobalVariables;
 import com.example.coema.Perfil.PacientePrincipal;
 import com.example.coema.R;
 
@@ -40,6 +41,9 @@ public class RegistroCitas extends AppCompatActivity {
     ArrayList<String> listaHorarios = new ArrayList<>();
     ArrayList<Integer> listaDoctoresConEspecialidad = new ArrayList<>(); // Lista de IDs de doctores
 
+    String pacAct;
+
+    int idActual=GlobalVariables.getInstance().getUserId();
 
 
     @Override
@@ -184,9 +188,58 @@ public class RegistroCitas extends AppCompatActivity {
         String horaCita = sprHorCita.getSelectedItem().toString();
 
         // Realiza la inserción en la base de datos en un AsyncTask
+        new InsertarPacienteActualTask();
         new InsertarCitaTask().execute(Integer.toString(especialidadID), String.valueOf(doctorID), fechaCita, horaCita);
 
+        Intent intent = new Intent(RegistroCitas.this, RegitrarPagoPaciente.class);
+        intent.putExtra("especialidadID", especialidadID);
+        intent.putExtra("doctorID", doctorID);
+        intent.putExtra("id_paciente", GlobalVariables.getInstance().getUserId());
+        intent.putExtra("fechaCita", fechaCita);
+        intent.putExtra("horaCita", horaCita);
+        startActivity(intent);
+
+
+
     }
+
+    private class InsertarPacienteActualTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+            Connection connection = null;
+            String idPaciente = "";
+
+            try {
+                connection = DatabaseConnection.getConnection();
+                if (connection != null) {
+                    String query = "SELECT t1.id_paciente " +
+                            "FROM pacientes AS t1 " +
+                            "JOIN usuarios AS t2 " +
+                            "ON t1.correo=t2.nombre_usuario " +
+                            "WHERE t2.id_usuario = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setInt(1, idActual);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    while (resultSet.next()) {
+                        idPaciente = resultSet.getString("id_paciente");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return idPaciente;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                pacAct = result;
+            }
+        }
+    }
+
 
     private class InsertarCitaTask extends AsyncTask<String, Void, Boolean> {
         @Override
@@ -205,13 +258,14 @@ public class RegistroCitas extends AppCompatActivity {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
 
+
                 try {
                     connection = DatabaseConnection.getConnection();
                     if (connection != null) {
                         String insertQuery = "INSERT INTO citas (id_paciente, id_doctor, id_tratamiento, fec_inic_cita, fec_fin_cita) " +
                                 "VALUES (?, ?, ?, ?, ?)";
                         preparedStatement = connection.prepareStatement(insertQuery);
-                        preparedStatement.setString(1, "73236940");
+                        preparedStatement.setString(1, pacAct);
                         preparedStatement.setInt(2, doctor);
                         preparedStatement.setLong(3, Long.parseLong(especialidad));
                         preparedStatement.setTimestamp(4, Timestamp.valueOf(nuevaFecha)); // Usa la fecha reformateada
