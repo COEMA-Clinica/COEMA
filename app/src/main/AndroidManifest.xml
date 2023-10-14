@@ -52,6 +52,18 @@
             android:label="Editar Pago">
         </activity>
         <activity
+            android:name=".Registro.RegistroDescansoEdit"
+            android:label="Editar Pago">
+        </activity>
+        <activity
+            android:name=".Registro.RegistroDescansos"
+            android:label="Editar Pago">
+        </activity>
+        <activity
+            android:name=".Index.ListarDescanso"
+            android:label="Editar Pago">
+        </activity>
+        <activity
             android:name=".Registro.RegistroTratamientos"
             android:label="Editar Pago">
         </activity>

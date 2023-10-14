@@ -66,6 +66,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="HISTORIAL DE PACIENTES"
+
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
 
@@ -153,6 +154,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="DESCANSO MÉDICO O RECETA MEDICA"
+                    android:onClick="descansoListar"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
 

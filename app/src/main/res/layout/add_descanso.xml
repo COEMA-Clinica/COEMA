@@ -19,7 +19,7 @@
         android:layout_below="@id/logoImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Agregar Tratamiento"
+        android:text="Agregar Descanso Médico"
         android:textColor="#FFFFFF"
         android:background="#000000"
         android:padding="8dp" />
@@ -33,10 +33,10 @@
         android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/tratamientoEditText"
+            android:id="@+id/pacienteEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tratamiento" />
+            android:hint="Paciente" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Input de Monto -->
@@ -48,10 +48,10 @@
         android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/amountEditText"
+            android:id="@+id/tratCitEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Precio" />
+            android:hint="Tratamiento de la Cita" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Input de Motivo de Cobro -->
@@ -63,17 +63,17 @@
         android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/detalleEditText"
+            android:id="@+id/descansoEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Detalle del tratamiento" />
+            android:hint="Descanso" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/addTratamientoButton"
+        android:id="@+id/addDescansoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Tratamiento"
+        android:text="Agregar Descanso Médico"
         android:layout_below="@id/reasonInputLayout"
         android:layout_marginTop="16dp" />
 </RelativeLayout>
