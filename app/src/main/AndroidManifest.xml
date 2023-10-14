@@ -68,12 +68,16 @@
             android:label="Editar Pago">
         </activity>
         <activity
+            android:name=".Registro.CrudOdontologo"
+            android:label="Crud Odo">
+        </activity>
+        <activity
             android:name=".Registro.RegistroTratamientosEdit"
             android:label="Editar Pago">
         </activity>
         <activity
             android:name=".Index.ActMenuOdonto"
-            android:label="Editar Pago">
+            android:label="MenuOdo">
         </activity>
         <activity
             android:name=".Index.ListarTratamientos"
@@ -92,6 +96,9 @@
         <activity
             android:name=".Perfil.PacientePrincipal"
             android:exported="false"/>
+        <activity android:name="com.example.coema.Index.ListarCitas">
+            <!-- Pueden haber más configuraciones aquí -->
+        </activity>
         <activity
             android:name=".Perfil.PerfilPaciente"
             android:exported="false"/> <!-- Configurado como "false" -->

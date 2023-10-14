@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Index.MenuRecibosActivity;
 import com.example.coema.R;
+import com.example.coema.Registro.CrudOdontologo;
 import com.example.coema.Registro.RegistroTratamientos;
 
 public class ActMenuAdmin extends AppCompatActivity {
@@ -27,6 +28,11 @@ public class ActMenuAdmin extends AppCompatActivity {
     public void onTratamientosClick(View view) {
         // Iniciar la actividad MenuRecibosActivity
         Intent intent = new Intent(this, ListarTratamientos.class);
+        startActivity(intent);
+    }
+    public void verDoctor(View view) {
+        // Iniciar la actividad MenuRecibosActivity
+        Intent intent = new Intent(this, CrudOdontologo.class);
         startActivity(intent);
     }
 }

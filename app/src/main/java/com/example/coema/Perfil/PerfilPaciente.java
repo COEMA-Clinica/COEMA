@@ -24,8 +24,11 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Conection.GlobalVariables;
 import com.example.coema.Listas.Paciente;
+import com.example.coema.Login.IniciarSesion;
 import com.example.coema.R;
+import com.example.coema.Registro.RegistroDescansoEdit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,19 +50,15 @@ public class PerfilPaciente extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA = 1;
     private static final int REQUEST_GALLERY = 2;
-
+    Integer idActual= GlobalVariables.getInstance().getUserId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.perfil);
         asignarReferencias();
-        recuperarData();
-//        obtenerDatos();
-
-
-        // Puedes agregar aquí la lógica para manejar la entrada del usuario y la funcionalidad de guardado en la base de datos.
-
+        PerfilPaciente.ObtenerDatosDeTablaAsyncTask task = new PerfilPaciente.ObtenerDatosDeTablaAsyncTask(idActual);
+        task.execute();
     }
 
 
@@ -75,6 +74,8 @@ public class PerfilPaciente extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imPerfil);
         btnSave = findViewById(R.id.btnSave);
         btnSelect = findViewById(R.id.btnSeleccionarImagen);
+
+
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,30 +86,20 @@ public class PerfilPaciente extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PerfilPaciente.GuardarCambiosAsyncTask task = new PerfilPaciente.GuardarCambiosAsyncTask(recuperarData());
+                PerfilPaciente.GuardarCambiosAsyncTask task = new PerfilPaciente.GuardarCambiosAsyncTask(idActual);
                 task.execute();
             }
         });
-        PerfilPaciente.ObtenerDatosDeTablaAsyncTask task = new PerfilPaciente.ObtenerDatosDeTablaAsyncTask(recuperarData());
-        task.execute();
+
     }
-    private Integer recuperarData() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            Integer idPaciente = Integer.valueOf(bundle.getInt("data"));
-            // Ahora tienes el valor idPaciente que pasaste desde la actividad anterior
-            // Puedes usarlo como sea necesario en esta actividad
-            return idPaciente;
-        }
-        return null;
-    }
+
 
     private class ObtenerDatosDeTablaAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        private final Integer idPaciente;
+        private final Integer idUsuario;
 
-        public ObtenerDatosDeTablaAsyncTask(Integer idPaciente) {
-            this.idPaciente=idPaciente;
+        public ObtenerDatosDeTablaAsyncTask(Integer idUsuario) {
+            this.idUsuario=idUsuario;
         }
 
         @Override
@@ -117,7 +108,7 @@ public class PerfilPaciente extends AppCompatActivity {
             try {
                 connection = DatabaseConnection.getConnection();
                 Statement st = connection.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM pacientes WHERE id_paciente='" + idPaciente+"'" );
+                ResultSet rs = st.executeQuery("SELECT * FROM pacientes WHERE id_usuario='" + idUsuario+"'" );
                 if (rs.next()) {
                     // El usuario se ha autenticado correctamente
                     String nom=rs.getString("nombres");
@@ -159,10 +150,10 @@ public class PerfilPaciente extends AppCompatActivity {
     }
 
         public class GuardarCambiosAsyncTask extends AsyncTask<Void, Void, String> {
-            private final Integer idPaciente;
+            private final Integer idUsuario;
 
-            public GuardarCambiosAsyncTask(Integer idPaciente) {
-                this.idPaciente=idPaciente;
+            public GuardarCambiosAsyncTask(Integer idUsuario) {
+                this.idUsuario=idUsuario;
             }
             @Override
             protected String doInBackground(Void... voids) {
@@ -181,7 +172,8 @@ public class PerfilPaciente extends AppCompatActivity {
 
                         // Convierte el Bitmap en un formato que necesites (por ejemplo, bytes)
                         String updateQuery = "UPDATE pacientes SET nombres = ?, apellidos = ?, correo = ?, " +
-                                "contrasena = ?, telefono = ?, fecha_nacimiento = to_date(?,'yyyy-MM-dd'), sexo = ? WHERE id_paciente = ?";
+                                "contrasena = ?, telefono = ?, fecha_nacimiento = to_date(?,'yyyy-MM-dd'), sexo = ? WHERE id_usuario = ?;" +
+                                "UPDATE usuarios SET nombre_usuario = ?, contrasena = ? WHERE id_usuario = ?;";
                         PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
                         preparedStatement.setString(1, nombre);
                         preparedStatement.setString(2, apellido);
@@ -190,16 +182,19 @@ public class PerfilPaciente extends AppCompatActivity {
                         preparedStatement.setString(5, telefono);
                         preparedStatement.setString(6, fecNac);
                         preparedStatement.setString(7, sexo);
-                        preparedStatement.setString(8, idPaciente.toString());
+                        preparedStatement.setInt(8, idUsuario);
+                        preparedStatement.setString(9, correo);
+                        preparedStatement.setString(10, contra);
+                        preparedStatement.setInt(11, idUsuario);
 
                         preparedStatement.executeUpdate();
                         preparedStatement.close();
 
                         if (historial.equals("")){
-                            String updateQuery2 = "UPDATE pacientes SET historial_medico = ? WHERE id_paciente = ?";
+                            String updateQuery2 = "UPDATE pacientes SET historial_medico = ? WHERE id_usuario = ?";
                             PreparedStatement preparedStatement2 = connection.prepareStatement(updateQuery2);
                             preparedStatement2.setString(1, historial);
-                            preparedStatement2.setString(2, idPaciente.toString());
+                            preparedStatement2.setInt(2, idUsuario);
 
                             preparedStatement2.executeUpdate();
                             preparedStatement2.close();
@@ -208,10 +203,10 @@ public class PerfilPaciente extends AppCompatActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             selectedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                             byte[] byteArray = stream.toByteArray();
-                            String updateQuery3 = "UPDATE pacientes SET foto = ? WHERE id_paciente = ?";
+                            String updateQuery3 = "UPDATE pacientes SET foto = ? WHERE id_usuario = ?";
                             PreparedStatement preparedStatement3 = connection.prepareStatement(updateQuery3);
                             preparedStatement3.setBytes(1, byteArray);
-                            preparedStatement3.setString(2, idPaciente.toString());
+                            preparedStatement3.setInt(2, idUsuario);
 
                             preparedStatement3.executeUpdate();
                             preparedStatement3.close();
