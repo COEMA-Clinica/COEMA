@@ -258,44 +258,82 @@ public class RegistroCitas extends AppCompatActivity {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
 
-
                 try {
                     connection = DatabaseConnection.getConnection();
                     if (connection != null) {
-                        String insertQuery = "INSERT INTO citas (id_paciente, id_doctor, id_tratamiento, fec_inic_cita, fec_fin_cita) " +
-                                "VALUES (?, ?, ?, ?, ?)";
-                        preparedStatement = connection.prepareStatement(insertQuery);
-                        preparedStatement.setString(1, pacAct);
-                        preparedStatement.setInt(2, doctor);
-                        preparedStatement.setLong(3, Long.parseLong(especialidad));
-                        preparedStatement.setTimestamp(4, Timestamp.valueOf(nuevaFecha)); // Usa la fecha reformateada
-                        preparedStatement.setTimestamp(5, Timestamp.valueOf(nuevaFecha)); // Usa la misma fecha para inicio y fin
+                        // Obtén el id_paciente de la tabla de pacientes
+                        int idPaciente = obtenerIdPaciente();
 
-                        preparedStatement.executeUpdate();
-                        preparedStatement.close();
+                        if (idPaciente != -1) {
+                            // Continúa con la inserción utilizando el id_paciente obtenido
+                            String insertQuery = "INSERT INTO citas (id_paciente, id_doctor, id_tratamiento, fec_inic_cita, fec_fin_cita) " +
+                                    "VALUES (?, ?, ?, ?, ?)";
+                            preparedStatement = connection.prepareStatement(insertQuery);
+                            preparedStatement.setInt(1, idPaciente);
+                            preparedStatement.setInt(2, doctor);
+                            preparedStatement.setLong(3, Long.parseLong(especialidad));
+                            preparedStatement.setTimestamp(4, Timestamp.valueOf(nuevaFecha)); // Usa la fecha reformateada
+                            preparedStatement.setTimestamp(5, Timestamp.valueOf(nuevaFecha)); // Usa la misma fecha para inicio y fin
 
-                        return true;
-                    } else {
-                        return false;
+                            preparedStatement.executeUpdate();
+                            preparedStatement.close();
+
+                            return true;
+                        }
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    return false;
                 } finally {
                     try {
                         if (preparedStatement != null) {
                             preparedStatement.close();
                         }
                         if (connection != null) {
-                            connection.close();
+
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
-            } else {
-                return false; // La fecha no tenía el formato esperado
             }
+            return false; // La fecha no tenía el formato esperado o se produjo un error.
+        }
+
+        private int obtenerIdPaciente() {
+            Connection connection = null;
+            PreparedStatement preparedStatement = null;
+
+            try {
+                connection = DatabaseConnection.getConnection();
+
+                if (connection != null) {
+                    // Realiza una consulta para obtener el id_paciente
+                    String selectQuery = "SELECT id_paciente FROM pacientes WHERE id_usuario = ?";
+                    preparedStatement = connection.prepareStatement(selectQuery);
+                    preparedStatement.setInt(1, GlobalVariables.getInstance().getUserId());
+
+                    ResultSet rs = preparedStatement.executeQuery();
+
+                    if (rs.next()) {
+                        return rs.getInt("id_paciente");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return -1; // Valor por defecto si no se pudo obtener el id_paciente
         }
 
         @Override
