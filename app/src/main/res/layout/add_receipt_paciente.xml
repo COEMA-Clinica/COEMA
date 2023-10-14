@@ -92,6 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Agregar Pago"
+        android:backgroundTint="#10aac1"
         android:layout_below="@id/reasonInputLayout"
         android:layout_marginTop="16dp" />
 </RelativeLayout>
