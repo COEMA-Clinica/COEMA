@@ -25,4 +25,11 @@ public class ActMenuOdonto extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void recetaListar(View view){
+        Intent intent = new Intent(this, ListarRecetas.class);
+        Bundle bundle=new Bundle();
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
 }
