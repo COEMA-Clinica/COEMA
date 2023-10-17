@@ -158,7 +158,7 @@ public class CrudOdontologo extends AppCompatActivity {
             try {
                 connection = DatabaseConnection.getConnection();
                 Statement st = connection.createStatement();
-                rs = st.executeQuery("SELECT d.id_doctor, d.nombres, d.apellidos, d.correo, d.contrasena, e.nombreespecialidad FROM doctores d, especialidadesodontologicas e WHERE e.especialidadid=d.especialidad and d.id_doctor='" + edtCodAlu.getText().toString() + "'");
+                rs = st.executeQuery("SELECT d.id_doctor, d.nombres, d.apellidos, u.nombre_usuario, u.contrasena, e.nombreespecialidad FROM doctores d, especialidadesodontologicas e, usuarios u WHERE e.especialidadid=d.especialidad and d.id_usuario = u.id_usuario and d.id_doctor='" + edtCodAlu.getText().toString() + "'");
                 if (rs.next()) {
                     // El usuario se ha autenticado correctamente
                     idUsuario = Integer.parseInt(rs.getString("id_doctor"));
@@ -179,7 +179,7 @@ public class CrudOdontologo extends AppCompatActivity {
                     String nom = rs.getString("nombres");
                     String ape = rs.getString("apellidos");
                     String apema = rs.getString("nombreespecialidad");
-                    String cor = rs.getString("correo");
+                    String cor = rs.getString("nombre_usuario");
                     String con = rs.getString("contrasena");
 
                     edtCodAlu.setText(id);
@@ -217,8 +217,8 @@ public class CrudOdontologo extends AppCompatActivity {
                     String contra=edtContraseñaAlu.getText().toString();
 
                     // Convierte el Bitmap en un formato que necesites (por ejemplo, bytes)
-                    String updateQuery = "UPDATE doctores SET id_doctor = ?, nombres = ?, apellidos = ?, especialidad = (select especialidadid from especialidadesodontologicas where nombreespecialidad = ?), " +
-                            "correo = ?, contrasena = ? WHERE id_doctor = '"+id+"'";
+                    String updateQuery = "UPDATE doctores SET id_doctor = ?, nombres = ?, apellidos = ?, especialidad = (select especialidadid from especialidadesodontologicas where nombreespecialidad = ?) WHERE id_doctor = '"+id+"';" +
+                            "UPDATE usuarios SET nombre_usuario = ?, contrasena = ? WHERE id_usuario = (select id_usuario from doctores where id_doctor= '"+id+"');";
                     PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
                     preparedStatement.setString(1, id);
                     preparedStatement.setString(2, nombre);
@@ -259,32 +259,37 @@ public class CrudOdontologo extends AppCompatActivity {
     private class EliminarOdoTask extends AsyncTask<String, Void, Integer> {
         protected Integer doInBackground(String... params) {
             int resultado = -1;
-
+            ResultSet rs;
+            int idUsuario=-1;
             try {
                 Connection connection = DatabaseConnection.getConnection();
                 if (connection != null) {
                     connection.setAutoCommit(false);  // Iniciar la transacción
-                    try {
-                        // Primera consulta: Eliminar el usuario
-                        String sqlUsuario = "DELETE FROM usuarios WHERE id_usuario = (SELECT id_usuario FROM doctores WHERE id_doctor = ?)";
-                        PreparedStatement pstUsuario = connection.prepareStatement(sqlUsuario);
-                        pstUsuario.setString(1, edtCodAlu.getText().toString());
-                        pstUsuario.executeUpdate();
 
-                        // Segunda consulta: Eliminar el doctor
+                        Statement st = connection.createStatement();
+                        rs = st.executeQuery("SELECT id_usuario from doctores WHERE id_doctor='" + edtCodAlu.getText().toString() + "'");
+                        if (rs.next()) {
+                            // El usuario se ha autenticado correctamente
+                            idUsuario = rs.getInt("id_usuario");
+                        }
+
+                        // Primera consulta: Eliminar el doctor
                         String sqlDoctor = "DELETE FROM doctores WHERE id_doctor = ?";
                         PreparedStatement pstDoctor = connection.prepareStatement(sqlDoctor);
                         pstDoctor.setString(1, edtCodAlu.getText().toString());
                         pstDoctor.executeUpdate();
 
+                        // Segunda consulta: Eliminar el usuario
+                        String sqlUsuario = "DELETE FROM usuarios WHERE id_usuario = ?";
+                        PreparedStatement pstUsuario = connection.prepareStatement(sqlUsuario);
+                        pstUsuario.setInt(1, idUsuario);
+                        pstUsuario.executeUpdate();
+
+
+
                         connection.commit();  // Confirmar la transacción
                         resultado = 1;  // Éxito
-                    } catch (SQLException e) {
-                        connection.rollback();  // Revertir la transacción en caso de error
-                        e.printStackTrace();
-                    } finally {
-                        connection.setAutoCommit(true);  // Restablecer la configuración de autocommit
-                    }
+
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
