@@ -118,6 +118,7 @@
 
                 <Button
                     style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:id="@+id/btnVerDocumentos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

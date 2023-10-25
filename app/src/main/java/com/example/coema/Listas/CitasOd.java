@@ -5,17 +5,24 @@ import java.util.Date;
 
 public class CitasOd implements Serializable {
 
-
+    private int id;
     private String nom;
     private String trat;
     private Date fec;
 
-    public CitasOd(String nom, String trat, Date fec) {
+    public CitasOd(int id, String nom, String trat, Date fec) {
+        this.id=id;
         this.nom = nom;
         this.trat = trat;
         this.fec = fec;
     }
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNom() {
         return nom;
     }

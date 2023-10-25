@@ -1,14 +1,19 @@
 package com.example.coema.Index;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.AdapterView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coema.Adapter.CitasAdapter;
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Fragments.RecyclerViewItemClickListener;
 import com.example.coema.Listas.CitasOd;
 import com.example.coema.R;
 
@@ -19,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ListarCitas extends AppCompatActivity {
+public class VerCitas extends AppCompatActivity implements RecyclerViewItemClickListener {
 
     private RecyclerView recyclerView;
     private CitasAdapter adapter;
@@ -35,7 +40,7 @@ public class ListarCitas extends AppCompatActivity {
         // Configura el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CitasAdapter(citas, null); // Pasa la lista de recibos al adaptador
+        adapter = new CitasAdapter(citas,this); // Pasa la lista de recibos al adaptador
         recyclerView.setAdapter(adapter);
         new ObtenerDatosDeTablaAsyncTask().execute();
 
@@ -74,6 +79,34 @@ public class ListarCitas extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onItemClick(int position, int id) {
+        // Aquí se muestra el AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ver Documentos");
+        builder.setMessage("¿Quiere agregar o visualizar las radiografías adjuntadas a esta cita?");
+
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(VerCitas.this, VerDocumentos.class);
+                intent.putExtra("clave_valor", id);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Lógica para "Cancelar" aquí
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
     /*private void clickenListView() {
         CitasAdapter adaptador = new CitasAdapter(citas, new OnItemClickListener() {
                 @Override
@@ -109,17 +142,18 @@ public class ListarCitas extends AppCompatActivity {
 
                 if (conn != null) {
                     // Ejecutar una consulta SQL para obtener datos
-                    String consultaSQL = "SELECT p.nombres, t.nombre, c.fec_inic_cita FROM citas c, pacientes p, tratamientos t where p.id_paciente=c.id_paciente and t.id_tratamiento=c.id_tratamiento";
+                    String consultaSQL = "SELECT c.id_cita, p.nombres, t.nombre, c.fec_inic_cita FROM citas c, pacientes p, tratamientos t where p.id_paciente=c.id_paciente and t.id_tratamiento=c.id_tratamiento";
                     Statement statement = conn.createStatement();
                     ResultSet resultSet = statement.executeQuery(consultaSQL);
 
                     // Procesar los resultados de la consulta y agregarlos a la lista
                     while (resultSet.next()) {
-                        String name = resultSet.getString(1);
-                        String detalle = resultSet.getString(2);
-                        Date amount = resultSet.getDate(3);
+                        int id=resultSet.getInt(1);
+                        String name = resultSet.getString(2);
+                        String detalle = resultSet.getString(3);
+                        Date amount = resultSet.getDate(4);
 
-                        citas.add(new CitasOd(0,name, detalle, amount));
+                        citas.add(new CitasOd(id,name, detalle, amount));
                     }
                 }
             } catch (Exception e) {

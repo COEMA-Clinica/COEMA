@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coema.Fragments.RecyclerViewItemClickListener;
 import com.example.coema.Listas.CitasOd;
 import com.example.coema.R;
 
@@ -16,16 +17,21 @@ import java.util.List;
 
 public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> {
 
+
+
+    private RecyclerViewItemClickListener clickListener;
     private List<CitasOd> citas;
     private int selectedCitasId = -1; // Variable para almacenar el ID del recibo seleccionado
     private Handler handler = new Handler(Looper.getMainLooper());
 
     private List<String> listaDeValores;
     //private OnItemClickListener listener;
-    public CitasAdapter(List<CitasOd> citas) {
+    public CitasAdapter(List<CitasOd> citas, RecyclerViewItemClickListener listener) {
         this.citas = citas;
+        this.clickListener = listener;
         //OnItemClickListener listener;
     }
+
 
     public int getSelectedCitasId() {
         return selectedCitasId;
@@ -44,7 +50,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CitasOd cita = citas.get(position);
+        CitasOd cita = citas.get(holder.getAdapterPosition());
         /*final String elemento = listaDeValores.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +64,12 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
         holder.txtNombre.setText(cita.getNom());
         holder.txtTratamiento.setText(cita.getTrat());
         holder.txtFecha.setText(String.valueOf(cita.getFec()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickListener.onItemClick(holder.getAdapterPosition(),cita.getId());
+            }
+        });
 
     }
 

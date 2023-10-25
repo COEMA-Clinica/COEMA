@@ -13,12 +13,22 @@ import com.example.coema.R;
 
 public class ActMenuOdonto extends AppCompatActivity {
 
-    Button btnVerCitas;
+    Button btnVerCitas, btnVerDocumentos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.odontologo_principal);
         btnVerCitas=(Button)findViewById(R.id.btnVerCitas);
+        btnVerDocumentos=(Button)findViewById(R.id.btnVerDocumentos);
+        btnVerDocumentos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iVerDoc = new Intent(ActMenuOdonto.this, VerCitas.class);
+                Bundle bundle = new Bundle();
+                iVerDoc.putExtras(bundle);
+                startActivity(iVerDoc);
+            }
+        });
         btnVerCitas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

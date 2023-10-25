@@ -103,6 +103,12 @@
             <!-- Pueden haber más configuraciones aquí -->
         </activity>
         <activity
+            android:name=".Index.VerDocumentos"
+            android:exported="false"/>
+        <activity
+            android:name=".Index.VerCitas"
+            android:exported="false"/>
+        <activity
             android:name=".Perfil.PerfilPaciente"
             android:exported="false"/> <!-- Configurado como "false" -->
     </application>
