@@ -147,8 +147,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="listarCitasPaciente"
                     android:text="VER CITAS"
+                    android:onClick="verCitas"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>

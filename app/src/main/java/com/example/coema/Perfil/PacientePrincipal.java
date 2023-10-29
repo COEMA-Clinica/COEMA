@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coema.Index.PacienteVerCita;
 import com.example.coema.R;
 import com.example.coema.Registro.RegistroCitas;
 
@@ -33,15 +34,19 @@ public class PacientePrincipal extends AppCompatActivity {
         Intent intent = new Intent(this, RegistroCitas.class);
         startActivity(intent);
     }
-
-
-
     public void perfilPaciente(View view) {
         Intent intent = new Intent(this, PerfilPaciente.class);
         Bundle bundle = new Bundle();
         intent.putExtras(bundle);
         startActivity(intent);
     }
+    public void verCitas(View view) {
+        Intent intent = new Intent(this, PacienteVerCita.class);
+        Bundle bundle = new Bundle();
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
 
 
     /*public void salirPrincipalPaciente(View view) {

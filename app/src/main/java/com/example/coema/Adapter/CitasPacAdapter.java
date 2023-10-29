@@ -16,18 +16,18 @@ import com.example.coema.R;
 
 import java.util.List;
 
-public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> {
+public class CitasPacAdapter extends RecyclerView.Adapter<CitasPacAdapter.ViewHolder> {
 
 
 
     private RecyclerViewItemClickListener clickListener;
-    private List<CitasOd> citas;
+    private List<CitasPac> citas;
     private int selectedCitasId = -1; // Variable para almacenar el ID del recibo seleccionado
     private Handler handler = new Handler(Looper.getMainLooper());
 
     private List<String> listaDeValores;
     //private OnItemClickListener listener;
-    public CitasAdapter(List<CitasOd> citas, RecyclerViewItemClickListener listener) {
+    public CitasPacAdapter(List<CitasPac> citas, RecyclerViewItemClickListener listener) {
         this.citas = citas;
         this.clickListener = listener;
         //OnItemClickListener listener;
@@ -44,14 +44,14 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
-    public void setTratamientos(List<CitasOd> citas) {
+    public void setTratamientos(List<CitasPac> citas) {
         this.citas = citas;
         notifyDataSetChanged(); // Notificar cambios en los datos para que el RecyclerView se actualice
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CitasOd cita = citas.get(holder.getAdapterPosition());
+        CitasPac cita = citas.get(holder.getAdapterPosition());
         /*final String elemento = listaDeValores.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
