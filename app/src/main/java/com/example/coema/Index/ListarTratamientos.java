@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coema.Adapter.ReceiptAdapter;
 import com.example.coema.Adapter.TratamientosAdapter;
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Conection.GlobalVariables;
 import com.example.coema.Listas.Tratamientos;
 import com.example.coema.Modelos.Receipt;
 import com.example.coema.R;
@@ -34,13 +35,15 @@ public class ListarTratamientos extends AppCompatActivity {
     private Button addTratamientoButton;
     private RecyclerView recyclerView;
     private TratamientosAdapter adapter;
+    Integer idActual= GlobalVariables.getInstance().getUserId();
+
     private List<Tratamientos> tratamientos = new ArrayList<>(); // Lista para almacenar los recibos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_tratamientos);
-
+        new BuscarAsyncTask().execute();
         // Encuentra las referencias a los botones
         editHistoryButton = findViewById(R.id.editHistoryButton);
         addTratamientoButton = findViewById(R.id.addTratamientoButton);
@@ -125,6 +128,43 @@ public class ListarTratamientos extends AppCompatActivity {
             // Actualiza el adaptador con la lista de recibos obtenida de la base de datos
             tratamientos.addAll(tratamientosList);
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    private class BuscarAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+
+            try {
+                // Obtener una conexión a la base de datos
+                Connection conn = DatabaseConnection.getConnection();
+
+                if (conn != null) {
+                    // Ejecutar una consulta SQL para obtener datos
+                    String consultaSQL = "SELECT id_rol FROM usuarios where id_usuario="+idActual+" and id_rol=3";
+                    Statement statement = conn.createStatement();
+                    ResultSet resultSet = statement.executeQuery(consultaSQL);
+
+                    // Procesar los resultados de la consulta y agregarlos a la lista
+                    if (resultSet.next()) {
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean usuario) {
+            if(usuario){
+                addTratamientoButton.setVisibility(View.GONE);
+                editHistoryButton.setVisibility(View.GONE);
+            }
         }
     }
 }

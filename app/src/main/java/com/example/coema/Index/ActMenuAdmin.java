@@ -36,4 +36,9 @@ public class ActMenuAdmin extends AppCompatActivity {
         Intent intent = new Intent(this, RegistroOdontologo.class);
         startActivity(intent);
     }
+    public void verCitasA(View view) {
+        // Iniciar la actividad MenuRecibosActivity
+        Intent intent = new Intent(this, VerCitas.class);
+        startActivity(intent);
+    }
 }

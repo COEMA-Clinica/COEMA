@@ -181,8 +181,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="nosotrosPrincipalPaciente"
-                    android:text="STAFF PROFESIONAL"
+                    android:onClick="verTratamientos"
+                    android:text="VER TRATAMIENTOS"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
 
