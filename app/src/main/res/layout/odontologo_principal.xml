@@ -71,12 +71,12 @@
                     app:backgroundTint="#10aac1" />
 
                 <Button
+                    android:id="@+id/btnReceta"
                     style="@android:style/Widget.Material.Light.Button.Toggle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="recetaListar"
-                    android:text="INDICACIONES DE CITAS"
+                    android:text="RECETAS MÉDICAS"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
@@ -152,12 +152,12 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnDescanso"
                     style="@android:style/Widget.Material.Light.Button.Toggle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="DESCANSO MÉDICO"
-                    android:onClick="descansoListar"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
 

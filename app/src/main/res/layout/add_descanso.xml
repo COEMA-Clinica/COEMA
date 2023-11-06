@@ -36,7 +36,8 @@
             android:id="@+id/pacienteEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Paciente" />
+            android:hint="Paciente"
+            android:inputType="none"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Input de Monto -->

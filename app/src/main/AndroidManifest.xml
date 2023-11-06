@@ -101,6 +101,12 @@
             android:name=".Login.IniciarSesionAdmin"
             android:exported="false"/>
         <activity
+            android:name=".Registro.RegistroDescanso"
+            android:exported="false"/>
+        <activity
+            android:name=".Registro.RegistroReceta"
+            android:exported="false"/>
+        <activity
             android:name=".Perfil.PacientePrincipal"
             android:exported="false"/>
         <activity android:name="com.example.coema.Index.ListarCitas">

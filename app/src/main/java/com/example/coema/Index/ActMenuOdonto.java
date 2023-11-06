@@ -13,20 +13,37 @@ import com.example.coema.R;
 
 public class ActMenuOdonto extends AppCompatActivity {
 
-    Button btnVerCitas, btnVerDocumentos;
+    Button btnVerCitas, btnVerDocumentos, btnVerReceta, btnVerDescanso;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.odontologo_principal);
         btnVerCitas=(Button)findViewById(R.id.btnVerCitas);
+        btnVerReceta=(Button)findViewById(R.id.btnReceta);
+        btnVerDescanso=(Button)findViewById(R.id.btnDescanso);
         btnVerDocumentos=(Button)findViewById(R.id.btnVerDocumentos);
         btnVerDocumentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iVerDoc = new Intent(ActMenuOdonto.this, VerCitas.class);
-                Bundle bundle = new Bundle();
-                iVerDoc.putExtras(bundle);
-                startActivity(iVerDoc);
+                Intent intent = new Intent(ActMenuOdonto.this, VerCitas.class);
+                intent.putExtra("opcion", 1);
+                startActivity(intent);
+            }
+        });
+        btnVerReceta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActMenuOdonto.this, VerCitas.class);
+                intent.putExtra("opcion", 2);
+                startActivity(intent);
+            }
+        });
+        btnVerDescanso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActMenuOdonto.this, VerCitas.class);
+                intent.putExtra("opcion", 3);
+                startActivity(intent);
             }
         });
         btnVerCitas.setOnClickListener(new View.OnClickListener() {

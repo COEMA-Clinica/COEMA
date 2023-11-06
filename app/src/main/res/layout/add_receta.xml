@@ -39,12 +39,25 @@
             android:hint="Paciente" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tratamientoInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/patientInputLayout"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/edtTratamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tratamiento" />
+    </com.google.android.material.textfield.TextInputLayout>
     <!-- Input de Monto -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/amountInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/patientInputLayout"
+        android:layout_below="@+id/tratamientoInputLayout"
         android:layout_marginTop="16dp">
 
         <EditText

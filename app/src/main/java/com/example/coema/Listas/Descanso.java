@@ -7,7 +7,10 @@ public class Descanso implements Serializable {
     private String nombre, descanso, tratamiento;
     private int id;
 
-    public Descanso(int id,String nombre, String descanso, String tratamiento) {
+    public Descanso() {
+    }
+
+    public Descanso(int id, String nombre, String descanso, String tratamiento) {
         this.id = id;
         this.nombre = nombre;
         this.descanso = descanso;

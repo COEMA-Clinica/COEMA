@@ -4,15 +4,26 @@ import java.io.Serializable;
 
 public class Receta implements Serializable {
 
-    private String nombre, medicamento, dosis;
+    private String nombre, tratamiento, medicamento, dosis;
     private int id;
 
-    public Receta(int id,String nombre, String medicamento, String dosis) {
+    public Receta() {
+    }
+
+    public Receta(int id, String nombre, String medicamento, String dosis) {
 
         this.id = id;
         this.nombre = nombre;
         this.medicamento = medicamento;
         this.dosis = dosis;
+    }
+
+    public String getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(String tratamiento) {
+        this.tratamiento = tratamiento;
     }
 
     public String getNombre() {

@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.AdapterView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +15,8 @@ import com.example.coema.Conection.DatabaseConnection;
 import com.example.coema.Fragments.RecyclerViewItemClickListener;
 import com.example.coema.Listas.CitasOd;
 import com.example.coema.R;
+import com.example.coema.Registro.RegistroDescanso;
+import com.example.coema.Registro.RegistroReceta;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -30,6 +31,7 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
     private CitasAdapter adapter;
     //OnItemClickListener listas;
     private List<CitasOd> citas = new ArrayList<>(); // Lista para almacenar los recibos
+    private Integer opcion;//descanso, receta, documento
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
         adapter = new CitasAdapter(citas,this); // Pasa la lista de recibos al adaptador
         recyclerView.setAdapter(adapter);
         new ObtenerDatosDeTablaAsyncTask().execute();
-
+        recuperarData();
 
 
         // Configura los listeners de los botones
@@ -78,23 +80,62 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
         // Iniciar una tarea asincrónica para obtener datos de la base de datos
 
     }
+    private void recuperarData() {
+        Bundle bundle= getIntent().getExtras();
+        if (bundle==null){
+            opcion=null;
+        }else{
+            opcion=(int)bundle.getInt("opcion");
+        }
+    }
 
 
     @Override
     public void onItemClick(int position, int id) {
         // Aquí se muestra el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Ver Documentos");
-        builder.setMessage("¿Quiere agregar o visualizar las radiografías adjuntadas a esta cita?");
+        switch (opcion){
+            case 1:
+                builder.setTitle("Radiografías");
+                builder.setMessage("¿Quiere agregar o visualizar las radiografías adjuntadas a esta cita?");
 
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(VerCitas.this, VerDocumentos.class);
-                intent.putExtra("clave_valor", id);
-                startActivity(intent);
-            }
-        });
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(VerCitas.this, VerDocumentos.class);
+                        intent.putExtra("clave_valor", id);
+                        startActivity(intent);
+                    }
+                });
+                break;
+            case 2:
+                builder.setTitle("Receta Médica");
+                builder.setMessage("¿Quiere agregar un receta médica para el paciente de la cita seleccionada?");
+
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(VerCitas.this, RegistroReceta.class);
+                        intent.putExtra("clave_valor", id);
+                        startActivity(intent);
+                    }
+                });
+                break;
+            case 3:
+                builder.setTitle("Descanso Médico");
+                builder.setMessage("¿Quiere agregar un descanso médico para el paciente de la cita seleccionada?");
+
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(VerCitas.this, RegistroDescanso.class);
+                        intent.putExtra("clave_valor", id);
+                        startActivity(intent);
+                    }
+                });
+                break;
+        }
+
 
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
