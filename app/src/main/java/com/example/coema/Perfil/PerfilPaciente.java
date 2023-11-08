@@ -1,6 +1,9 @@
 package com.example.coema.Perfil;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +23,7 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 
@@ -59,6 +63,8 @@ public class PerfilPaciente extends AppCompatActivity {
         asignarReferencias();
         PerfilPaciente.ObtenerDatosDeTablaAsyncTask task = new PerfilPaciente.ObtenerDatosDeTablaAsyncTask(idActual);
         task.execute();
+
+
     }
 
 
