@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coema.Index.MenuRecibosActivity;
+import com.example.coema.Listas.Paciente;
 import com.example.coema.R;
 import com.example.coema.Registro.CrudOdontologo;
 import com.example.coema.Registro.RegistroOdontologo;
@@ -26,6 +27,11 @@ public class ActMenuAdmin extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void listarPacientesAdmin(View view) {
+        // Iniciar la actividad MenuRecibosActivity
+        Intent intent = new Intent(this, PacientesMod.class);
+        startActivity(intent);
+    }
     public void onTratamientosClick(View view) {
         // Iniciar la actividad MenuRecibosActivity
         Intent intent = new Intent(this, ListarTratamientos.class);

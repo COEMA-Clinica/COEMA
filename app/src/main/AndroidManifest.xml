@@ -54,6 +54,10 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".Index.PacientesMod"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".Registro.RegitroPago"
             android:label="Registro de Pago">
         </activity>
