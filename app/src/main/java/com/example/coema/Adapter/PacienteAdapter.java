@@ -1,89 +1,90 @@
 package com.example.coema.Adapter;
 
-import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coema.Index.NotifyMod;
-import com.example.coema.Listas.Notify;
+import com.example.coema.Listas.Paciente;
+import com.example.coema.Listas.Tratamientos;
 import com.example.coema.R;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
+public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.ViewHolder> {
 
-public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.NotifyViewHolder> {
-    private List<Notify> notifyList;
-    private Context context;
+    private List<Paciente> paciente;
+    private int selectedPacienteId = -1; // Variable para almacenar el ID del recibo seleccionado
+    private Handler handler = new Handler(Looper.getMainLooper());
 
-    public PacienteAdapter(Context context, List<Notify> notifyList) {
-        this.context = context;
-        this.notifyList = notifyList;
+    public PacienteAdapter(List<Paciente> paciente) {
+        this.paciente = paciente;
     }
 
-    @NonNull
-    @Override
-    public NotifyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_notify, parent, false);
-        return new NotifyViewHolder(view);
+    public int getSelectedPacienteId() {
+        return selectedPacienteId;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotifyViewHolder holder, int position) {
-        final Notify notify = notifyList.get(position);
-        holder.bind(notify);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_paciente, parent, false);
+        return new ViewHolder(view);
+    }
 
-        // Agregar un oyente para el cambio de estado del CheckBox
-        holder.checkboxCita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    public void setTratamientos(List<Paciente> paciente) {
+        this.paciente = paciente;
+        notifyDataSetChanged(); // Notificar cambios en los datos para que el RecyclerView se actualice
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Paciente pacientes = paciente.get(position);
+
+        holder.idTextView.setText(String.valueOf(pacientes.getId()));
+        holder.nameTextView.setText(pacientes.getNombre());
+        holder.detalleTextView.setText(pacientes.getApellido());
+        holder.amountTextView.setText(String.valueOf(pacientes.getCorreo()));
+
+        // Configurar el estado del CheckBox
+        holder.selectCheckbox.setChecked(pacientes.getId() == selectedPacienteId);
+
+        // Escuchar cambios en el estado del CheckBox
+        holder.selectCheckbox.setOnCheckedChangeListener(null); // Desactivar el listener temporalmente
+
+        holder.selectCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (context instanceof NotifyMod) {
-                        ((NotifyMod) context).setCitaSeleccionadaId(notify.getIdCita());
-                    }
-                } else {
-                    if (context instanceof NotifyMod) {
-                        ((NotifyMod) context).setCitaSeleccionadaId(-1);
-                    }
-                }
+            public void onClick(View v) {
+                // Actualizar el ID del recibo seleccionado
+                selectedPacienteId = pacientes.getId();
+                notifyDataSetChanged();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return notifyList.size();
+        return paciente.size();
     }
 
-    public class NotifyViewHolder extends RecyclerView.ViewHolder {
-        private CheckBox checkboxCita;
-        private TextView txtEstadoCita;
-        private TextView txtTratamiento;
-        private TextView txtFecha;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView nameTextView;
+        public TextView detalleTextView;
+        public TextView amountTextView;
+        public TextView idTextView;
+        public CheckBox selectCheckbox;
 
-        public NotifyViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            checkboxCita = itemView.findViewById(R.id.checkboxCita);
-            txtEstadoCita = itemView.findViewById(R.id.txtEstadoCita);
-            txtTratamiento = itemView.findViewById(R.id.txtTratamiento);
-            txtFecha = itemView.findViewById(R.id.txtFecha);
-        }
-
-        public void bind(Notify notify) {
-            checkboxCita.setChecked(false); // No estoy seguro de si necesitas establecer esto en falso
-            txtEstadoCita.setText(notify.getEstadoCita()); // Establecer el estado de la cita desde Notify
-            txtTratamiento.setText(notify.getNombreTratamiento()); // Establecer el nombre del tratamiento desde Notify
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaFormatted = sdf.format(notify.getFechaCita());
-            txtFecha.setText(fechaFormatted);
+            nameTextView = itemView.findViewById(R.id.nameTextView);
+            detalleTextView = itemView.findViewById(R.id.detalleTextView);
+            amountTextView = itemView.findViewById(R.id.amountTextView);
+            selectCheckbox = itemView.findViewById(R.id.selectCheckbox);
+            idTextView = itemView.findViewById(R.id.idTextView);
         }
     }
 }
-
