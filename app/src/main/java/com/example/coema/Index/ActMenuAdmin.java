@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coema.Fragments.IListarPacienteAdmin;
 import com.example.coema.Index.MenuRecibosActivity;
 import com.example.coema.R;
 import com.example.coema.Registro.CrudOdontologo;
@@ -20,6 +21,12 @@ public class ActMenuAdmin extends AppCompatActivity {
     }
 
     // Método que se llama cuando se hace clic en la imagen de "Recibo de Pagos"
+
+    public void onListarPacientesClick(View view) {
+        // Iniciar la actividad MenuRecibosActivity
+        Intent intent = new Intent(this, ListarPaciente.class);
+        startActivity(intent);
+    }
     public void onReciboDePagosClick(View view) {
         // Iniciar la actividad MenuRecibosActivity
         Intent intent = new Intent(this, MenuRecibosActivity.class);

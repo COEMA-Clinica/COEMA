@@ -1,12 +1,20 @@
 package com.example.coema.Listas;
 
+import com.example.coema.Modelos.Receipt;
+
 import java.io.Serializable;
 
 public class Paciente implements Serializable {
     private String nombre, apellido, correo, contra, telefono, fecNac, sexo;
     private int id_foto, id;
 
-    public Paciente() {
+    public Paciente(int id,  String nombre, String apellido, String correo) {
+
+        this.id = id;
+        this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+
     }
 
     public Paciente(String nombre, String apellido, String correo, String contra, String telefono, String fecNac, String sexo, int id_foto, int id) {
@@ -20,6 +28,7 @@ public class Paciente implements Serializable {
         this.id_foto = id_foto;
         this.id = id;
     }
+
 
     public String getNombre() {
         return nombre;

@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="listarPacientesAdmin"
+                    android:onClick="onListarPacientesClick"
                     android:text="VER PACIENTES"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
@@ -144,8 +144,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:contentDescription="seleccionar_cita"
-                    app:srcCompat="@drawable/ic_change" />
+                    android:contentDescription="salir"
+                    app:srcCompat="@drawable/ic_exit" />
             </LinearLayout>
 
             <LinearLayout
@@ -168,57 +168,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="registrarTratamientosAdmin"
-                    android:text="PROXIMAMENTE ..."
-                    android:textColor="@color/black"
-                    app:backgroundTint="#10aac1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:contentDescription="sobrenosotros"
-
-                    app:srcCompat="@drawable/ic_info" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:contentDescription="salir"
-                    app:srcCompat="@drawable/ic_exit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    style="@android:style/Widget.Material.Light.Button.Toggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="nosotrosPrincipalAdmin"
-                    android:text="STAFF PROFESIONAL"
-                    android:textColor="@color/black"
-                    app:backgroundTint="#10aac1" />
-
-                <Button
-                    style="@android:style/Widget.Material.Light.Button.Toggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:onClick="salirPrincipal"
                     android:textColor="@color/black"
                     android:text="CERRAR SESIÓN"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
