@@ -28,7 +28,7 @@ public class DatabaseConnection {
         if (conn == null) {
             try {
                 Class.forName("org.postgresql.Driver");
-                String url = "jdbc:postgresql://dpg-corcqb7sc6pc73dmn500-a.oregon-postgres.render.com:5432/codema";
+                String url = "jdbc:postgresql://dpg-corcqb7sc6pc73dmn500-a.oregon-postgres.render.com:5432/coema";
                 String user = "coema_deidad";
                 String password = "yR7nvHnyZMfw2VXiEOM0fdNPQoFLGyfQ";
 
