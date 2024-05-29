@@ -213,12 +213,13 @@ public class RegistroCitas extends AppCompatActivity {
                     if (connection != null) {
                         int idPaciente = obtenerIdPaciente();
 
+
                         if (idPaciente != -1) {
                             String insertQuery = "INSERT INTO citas (id_paciente, id_doctor, id_tratamiento, fec_inic_cita, fec_fin_cita) " +
                                     "VALUES (?, ?, ?, ?, ?)";
                             preparedStatement = connection.prepareStatement(insertQuery);
                             preparedStatement.setInt(1, idPaciente);
-                            preparedStatement.setInt(2, doctor);
+                            preparedStatement.setInt(2, '1');
                             preparedStatement.setLong(3, Long.parseLong(especialidad));
                             preparedStatement.setTimestamp(4, Timestamp.valueOf(nuevaFecha));
                             preparedStatement.setTimestamp(5, Timestamp.valueOf(nuevaFecha));

@@ -25,7 +25,7 @@ public class ActMenuAdmin extends AppCompatActivity {
 
     public void onListarPacientesClick(View view) {
         // Iniciar la actividad MenuRecibosActivity
-        Intent intent = new Intent(this, ListarPaciente.class);
+        Intent intent = new Intent(this, PacientesMod.class);
         startActivity(intent);
     }
     public void onReciboDePagosClick(View view) {
