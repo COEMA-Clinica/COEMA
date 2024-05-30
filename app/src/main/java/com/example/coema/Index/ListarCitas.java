@@ -109,7 +109,7 @@ public class ListarCitas extends AppCompatActivity {
 
                 if (conn != null) {
                     // Ejecutar una consulta SQL para obtener datos
-                    String consultaSQL = "SELECT p.nombres, t.nombre, c.fecha_cita FROM citas c, pacientes p, tratamientos t where p.id_paciente=c.id_paciente and t.id_tratamiento=c.id_tratamiento";
+                    String consultaSQL = "SELECT p.nombres, t.nombre, c.fec_inic_cita FROM citas c, pacientes p, tratamientos t where p.id_paciente=c.id_paciente and t.id_tratamiento=c.id_tratamiento";
                     Statement statement = conn.createStatement();
                     ResultSet resultSet = statement.executeQuery(consultaSQL);
 

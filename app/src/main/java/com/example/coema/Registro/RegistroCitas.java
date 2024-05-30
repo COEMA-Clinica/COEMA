@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,16 +24,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class RegistroCitas extends AppCompatActivity {
 
-    EditText edtFecCita;
-    Spinner sprTratCita, sprHorCita, sprDocCita;
-    Button btnRegistrarCita;
-    Button btnInicioCita;
+    EditText edtFecCita, edtNomCita, edtApePatCita, edtApeMatCita;
+    Spinner sprSexoCita, sprEspCita, sprDocCita, sprClinCita;
+    Button btnRegCita, btnInicioCita;
     ArrayList<String> listaTratamientos = new ArrayList<>();
     ArrayList<String> listaHorarios = new ArrayList<>();
     private ArrayList<Integer> listaIdTratamientos = new ArrayList<>();
@@ -49,12 +48,17 @@ public class RegistroCitas extends AppCompatActivity {
 
     private void asignarReferencias() {
         edtFecCita = findViewById(R.id.edtFecCita);
-        sprTratCita = findViewById(R.id.sprTratCita);
-        sprHorCita = findViewById(R.id.sprHorCita);
-        btnRegistrarCita = findViewById(R.id.btnRegistrar);
+        edtNomCita = findViewById(R.id.edtNomCita);
+        edtApePatCita = findViewById(R.id.edtApePatCita);
+        edtApeMatCita = findViewById(R.id.edtApeMatCita);
+        sprSexoCita = findViewById(R.id.sprSexoCita);
+        sprEspCita = findViewById(R.id.sprEspCita);
+        sprDocCita = findViewById(R.id.sprDocCita);
+        sprClinCita = findViewById(R.id.sprClinCita);
+        btnRegCita = findViewById(R.id.btnRegCita);
         btnInicioCita = findViewById(R.id.btnInicioCita);
 
-        btnRegistrarCita.setOnClickListener(new View.OnClickListener() {
+        btnRegCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registrarCita();
@@ -100,7 +104,7 @@ public class RegistroCitas extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaHorarios);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sprHorCita.setAdapter(adapter);
+        sprClinCita.setAdapter(adapter);
     }
 
     private void mostrarSelectorFecha() {
@@ -143,67 +147,33 @@ public class RegistroCitas extends AppCompatActivity {
     }
 
     private void registrarCita() {
-        int especialidadID = listaIdTratamientos.get(sprTratCita.getSelectedItemPosition());
+        String nombre = edtNomCita.getText().toString();
+        String apePat = edtApePatCita.getText().toString();
+        String apeMat = edtApeMatCita.getText().toString();
+//        String sexo = sprSexoCita.getSelectedItem().toString();
+        String especialidad = sprEspCita.getSelectedItem().toString();
+//        String odontologo = sprDocCita.getSelectedItem().toString();
         String fechaCita = edtFecCita.getText().toString();
-        String horaCita = sprHorCita.getSelectedItem().toString();
-        new InsertarPacienteActualTask().execute();
-        new InsertarCitaTask().execute(Integer.toString(especialidadID), fechaCita, horaCita);
-        Intent intent = new Intent(RegistroCitas.this, RegitrarPagoPaciente.class);
-        intent.putExtra("especialidadID", especialidadID);
-        intent.putExtra("id_paciente", GlobalVariables.getInstance().getUserId());
-        intent.putExtra("fechaCita", fechaCita);
-        intent.putExtra("horaCita", horaCita);
-        startActivity(intent);
-    }
+        String horaCita = sprClinCita.getSelectedItem().toString();
 
-    private class InsertarPacienteActualTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... params) {
-            Connection connection = null;
-            String idPaciente = "";
-
-            try {
-                connection = DatabaseConnection.getConnection();
-                if (connection != null) {
-                    String query = "SELECT t1.id_paciente " +
-                            "FROM pacientes AS t1 " +
-                            "JOIN usuarios AS t2 " +
-                            "ON t1.correo=t2.nombre_usuario " +
-                            "WHERE t2.id_usuario = ?";
-                    PreparedStatement preparedStatement = connection.prepareStatement(query);
-                    preparedStatement.setInt(1, idActual);
-                    ResultSet resultSet = preparedStatement.executeQuery();
-
-                    while (resultSet.next()) {
-                        idPaciente = resultSet.getString("id_paciente");
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            return idPaciente;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                pacAct = result;
-            }
-        }
+        new InsertarCitaTask().execute(nombre, "pedro", especialidad, fechaCita, horaCita, apePat, apeMat, "masculino");
     }
 
     private class InsertarCitaTask extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... params) {
-            String especialidad = params[0];
-            int doctor = 0;
-            String fecha = params[1];
-            String hora = params[2];
+            String nombre = params[0];
+           // String odontologo = params[1];
+            String especialidad = params[2];
+            String fecha = params[3];
+            String hora = params[4];
+            String apePat = params[5];
+            String apeMat = params[6];
+          //  String sexo = params[7];
 
             String[] parts = fecha.split("/");
             if (parts.length == 3) {
-                String nuevaFecha = parts[2] + "-" + parts[1] + "-" + parts[0] + " 00:00:00";
+                String nuevaFecha = parts[2] + "-" + parts[1] + "-" + parts[0];
 
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
@@ -211,24 +181,23 @@ public class RegistroCitas extends AppCompatActivity {
                 try {
                     connection = DatabaseConnection.getConnection();
                     if (connection != null) {
-                        int idPaciente = obtenerIdPaciente();
+                        String insertQuery = "INSERT INTO cita (nombre, odontologo, tratamiento, hora, feccit, apepat, apemat, sexo,correo) " +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+                        preparedStatement = connection.prepareStatement(insertQuery);
+                        preparedStatement.setString(1, nombre);
+                        preparedStatement.setString(2, "Javier");
+                        preparedStatement.setString(3, especialidad);
+                        preparedStatement.setString(4, "5:00");
+                        preparedStatement.setString(5, nuevaFecha);
+                        preparedStatement.setString(6, apePat);
+                        preparedStatement.setString(7, apeMat);
+                        preparedStatement.setString(8, "Masculino");
+                        preparedStatement.setString(9, "aaa");
 
+                        preparedStatement.executeUpdate();
+                        preparedStatement.close();
 
-                        if (idPaciente != -1) {
-                            String insertQuery = "INSERT INTO citas (id_paciente, id_doctor, id_tratamiento, fec_inic_cita, fec_fin_cita) " +
-                                    "VALUES (?, ?, ?, ?, ?)";
-                            preparedStatement = connection.prepareStatement(insertQuery);
-                            preparedStatement.setInt(1, idPaciente);
-                            preparedStatement.setInt(2, '1');
-                            preparedStatement.setLong(3, Long.parseLong(especialidad));
-                            preparedStatement.setTimestamp(4, Timestamp.valueOf(nuevaFecha));
-                            preparedStatement.setTimestamp(5, Timestamp.valueOf(nuevaFecha));
-
-                            preparedStatement.executeUpdate();
-                            preparedStatement.close();
-
-                            return true;
-                        }
+                        return true;
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -237,47 +206,12 @@ public class RegistroCitas extends AppCompatActivity {
                         if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
             }
             return false;
-        }
-
-        private int obtenerIdPaciente() {
-            Connection connection = null;
-            PreparedStatement preparedStatement = null;
-
-            try {
-                connection = DatabaseConnection.getConnection();
-
-                if (connection != null) {
-                    String selectQuery = "SELECT id_paciente FROM pacientes WHERE id_usuario = ?";
-                    preparedStatement = connection.prepareStatement(selectQuery);
-                    preparedStatement.setInt(1, GlobalVariables.getInstance().getUserId());
-
-                    ResultSet rs = preparedStatement.executeQuery();
-
-                    if (rs.next()) {
-                        return rs.getInt("id_paciente");
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (preparedStatement != null) {
-                        preparedStatement.close();
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return -1;
         }
 
         @Override
@@ -328,7 +262,7 @@ public class RegistroCitas extends AppCompatActivity {
     private void cargarListaEspecialidades(ArrayList<String> especialidades) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, especialidades);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sprTratCita.setAdapter(adapter);
+        sprEspCita.setAdapter(adapter);
     }
 
     private void cargarListaDoctores(ArrayList<String> doctores) {
