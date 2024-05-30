@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coema.Adapter.DescansoAdapter;
 import com.example.coema.Adapter.TratamientosAdapter;
 import com.example.coema.Conection.DatabaseConnection;
+import com.example.coema.Conection.GlobalVariables;
 import com.example.coema.Listas.Descanso;
 import com.example.coema.Listas.Tratamientos;
 import com.example.coema.R;
@@ -34,13 +35,15 @@ public class ListarDescanso extends AppCompatActivity {
     private Button addDescansoButton;
     private RecyclerView recyclerView;
     private DescansoAdapter adapter;
+    Integer idActual= GlobalVariables.getInstance().getUserId();
+
     private List<Descanso> descansos = new ArrayList<>(); // Lista para almacenar los recibos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_descansos);
-
+        new BuscarAsyncTask().execute();
         // Encuentra las referencias a los botones
         editDescansoButton = findViewById(R.id.editDescansoButton);
         addDescansoButton = findViewById(R.id.addDescansoButton);
@@ -98,18 +101,17 @@ public class ListarDescanso extends AppCompatActivity {
                 if (conn != null) {
                     // Ejecutar una consulta SQL para obtener datos
                     String consultaSQL = "SELECT id, nombre, descanso, tratamiento FROM descanso";
-
                     Statement statement = conn.createStatement();
                     ResultSet resultSet = statement.executeQuery(consultaSQL);
 
                     // Procesar los resultados de la consulta y agregarlos a la lista
                     while (resultSet.next()) {
                         int id = resultSet.getInt("id");
-                        String name = resultSet.getString("nombre");
+                        String nombre = resultSet.getString("nombre");
                         String descanso = resultSet.getString("descanso");
                         String tratamiento = resultSet.getString("tratamiento");
 
-                        descansos.add(new Descanso(id, name, descanso, tratamiento));
+                        descansos.add(new Descanso(id, nombre, descanso, tratamiento));
                     }
                 }
             } catch (Exception e) {
@@ -126,6 +128,45 @@ public class ListarDescanso extends AppCompatActivity {
             // Actualiza el adaptador con la lista de recibos obtenida de la base de datos
             descansos.addAll(descansoList);
             adapter.notifyDataSetChanged();
+
+        }
+    }
+    private class BuscarAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+
+            try {
+                // Obtener una conexión a la base de datos
+                Connection conn = DatabaseConnection.getConnection();
+
+                if (conn != null) {
+                    // Ejecutar una consulta SQL para obtener datos
+                    String consultaSQL = "SELECT id_rol FROM usuarios where id_usuario="+idActual+" and id_rol=3";
+                    Statement statement = conn.createStatement();
+                    ResultSet resultSet = statement.executeQuery(consultaSQL);
+
+                    // Procesar los resultados de la consulta y agregarlos a la lista
+                    if (resultSet.next()) {
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean usuario) {
+            if(usuario){
+                addDescansoButton.setVisibility(View.GONE);
+                editDescansoButton.setVisibility(View.GONE);
+            }
         }
     }
 }
+
+

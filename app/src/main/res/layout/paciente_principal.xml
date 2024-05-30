@@ -137,7 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="registrarCita"
+                    android:onClick="verDescansos"
                     android:text="DESCANSO MÉDICO O RECETA MÉDICA"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />

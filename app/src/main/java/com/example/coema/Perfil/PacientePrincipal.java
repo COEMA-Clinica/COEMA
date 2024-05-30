@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import com.example.coema.Index.ListarDescanso;
 import com.example.coema.Index.ListarTratamientos;
 import com.example.coema.Index.NotifyMod;
 import com.example.coema.Index.PacienteVerCita;
@@ -113,6 +114,12 @@ public class PacientePrincipal extends AppCompatActivity {
 
     public void verTratamientos(View view) {
         Intent intent = new Intent(this, ListarTratamientos.class);
+        Bundle bundle = new Bundle();
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+    public void verDescansos(View view) {
+        Intent intent = new Intent(this, ListarDescanso.class);
         Bundle bundle = new Bundle();
         intent.putExtras(bundle);
         startActivity(intent);
