@@ -51,9 +51,9 @@ public class RegistroCitas extends AppCompatActivity {
         edtNomCita = findViewById(R.id.edtNomCita);
         edtApePatCita = findViewById(R.id.edtApePatCita);
         edtApeMatCita = findViewById(R.id.edtApeMatCita);
-        sprSexoCita = findViewById(R.id.sprSexoCita);
+        //sprSexoCita = findViewById(R.id.sprSexoCita);
         sprEspCita = findViewById(R.id.sprEspCita);
-        sprDocCita = findViewById(R.id.sprDocCita);
+        //sprDocCita = findViewById(R.id.sprDocCita);
         sprClinCita = findViewById(R.id.sprClinCita);
         btnRegCita = findViewById(R.id.btnRegCita);
         btnInicioCita = findViewById(R.id.btnInicioCita);

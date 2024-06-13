@@ -8,13 +8,12 @@
 
     <ScrollView
         android:layout_width="413dp"
-        android:layout_height="601dp"
+        android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 app:srcCompat="@drawable/coema_nombre" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,6 +46,7 @@
                     app:srcCompat="@drawable/ic_plan_date" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,6 +109,7 @@
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,11 +150,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="VER CITAS"
                     android:onClick="verCitas"
+                    android:text="VER CITAS"
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,6 +200,7 @@
                     android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,6 +214,7 @@
                     app:srcCompat="@drawable/ic_exit" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,8 +227,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="salirPrincipalPaciente"
-                    android:textColor="@color/black"
                     android:text="CERRAR SESIÓN"
+                    android:textColor="@color/black"
                     app:backgroundTint="#10aac1" />
             </LinearLayout>
 
