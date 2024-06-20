@@ -173,7 +173,10 @@ public class PacientesMod extends AppCompatActivity {
                 int idCita = rs.getInt("id_paciente");;
                 String nombreTratamiento = rs.getString("nombres") + " " + rs.getString("apellidos");
                 Date fechaCita = rs.getDate("fecha_nacimiento");
+                if (fechaCita == null) {
 
+                    fechaCita = new Date(0); // Soluciones Galindo
+                }
                 String estadoCita = rs.getString("id_paciente");
 
 

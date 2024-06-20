@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,6 +93,11 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
 
     @Override
     public void onItemClick(int position, int id) {
+        Integer citaId = id; // Convierte id a Integer
+
+            citaId = 6; // Valor predeterminado, asegúrate de que este valor no sea válido en tu lógica
+
+        final Integer finalCitaId = citaId;
         // Aquí se muestra el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         switch (opcion){
@@ -103,7 +109,7 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(VerCitas.this, VerDocumentos.class);
-                        intent.putExtra("clave_valor", id);
+                        intent.putExtra("clave_valor", finalCitaId);
                         startActivity(intent);
                     }
                 });
@@ -116,7 +122,7 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(VerCitas.this, RegistroReceta.class);
-                        intent.putExtra("clave_valor", id);
+                        intent.putExtra("clave_valor", finalCitaId);
                         startActivity(intent);
                     }
                 });
@@ -129,7 +135,7 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(VerCitas.this, RegistroDescanso.class);
-                        intent.putExtra("clave_valor", id);
+                        intent.putExtra("clave_valor", finalCitaId);
                         startActivity(intent);
                     }
                 });
@@ -148,6 +154,7 @@ public class VerCitas extends AppCompatActivity implements RecyclerViewItemClick
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     /*private void clickenListView() {
         CitasAdapter adaptador = new CitasAdapter(citas, new OnItemClickListener() {
                 @Override
